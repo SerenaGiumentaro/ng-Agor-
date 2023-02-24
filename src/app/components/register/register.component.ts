@@ -1,41 +1,45 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component , OnInit} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../interface';
 import { Router } from '@angular/router';
-import { ErrorStateMatcher } from '@angular/material/core';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
-  constructor(private http: HttpClient, private route: Router) {}
+export class RegisterComponent implements OnInit{
+  constructor(private http: HttpClient, private route: Router, private fb :FormBuilder) {}
+
+
+  registerForm!: FormGroup
   hide!: boolean;
   selectedGender!: string;
-  emailFormControl = new FormControl('', [Validators.required, Validators.email])
   matcher = new MyErrorStateMatcher();
+  ngOnInit(): void {
+    this.registerForm = new FormGroup({
+      name:new FormControl('',[Validators.minLength(8), Validators.required] ),
+      email : new FormControl('', [Validators.required, Validators.email]),
+      token : new FormControl('',[Validators.minLength(64),Validators.required] ),
+      gender: new FormControl('')
 
-  onSubmit(form: NgForm) {
-    console.log(form.value);
+    })
+  }
+
+  onSubmit() {
+    console.log(this.registerForm.value)
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${form.value.token}`,
+      Authorization: `Bearer ${this.registerForm.value.token}`,
     });
 
     this.http
       .post<User>(
         'https://gorest.co.in/public/v2/users',
         {
-          name: form.value.name,
-          email: form.value.email,
-          gender: form.value.gender,
+          name: this.registerForm.value.name,
+          email: this.registerForm.value.email,
+          gender: this.registerForm.value.gender,
           status: 'active',
         },
         { headers }
@@ -44,7 +48,7 @@ export class RegisterComponent {
         next:(res:User) => {
           alert('Nuovo utente creato con successo');
           localStorage.setItem('user_id', JSON.stringify(res.id));
-          localStorage.setItem('token', form.value.token);
+          localStorage.setItem('token', this.registerForm.value.token);
           this.route.navigate(['login']);
         },
         error:(err) => {
