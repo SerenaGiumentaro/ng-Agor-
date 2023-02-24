@@ -6,10 +6,9 @@
       <button mat-icon-button matSuffix type="button">
         <mat-icon>person</mat-icon>
       </button>
-      <mat-error *ngIf="registerForm.get('name')">
+      <mat-error *ngIf="registerForm.get('name')?.invalid">
         Il nome deve essere di almeno 8 caratteri
       </mat-error>
-      <mat-error *ngIf=""> Il nome è <strong>obbligatorio</strong> </mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -24,8 +23,7 @@
       <button mat-icon-button matSuffix type="button">
         <mat-icon>email</mat-icon>
       </button>
-      <mat-error *ngIf=""> Inserisci un indirizzo email valido </mat-error>
-      <mat-error *ngIf=""> L' email è <strong>obbligatoria</strong> </mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.invalid"> Inserisci un indirizzo email valido </mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -60,8 +58,7 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf=""> Il token è <strong>obbligatorio</strong> </mat-error>
-      <mat-error *ngIf=""> Il token deve contenere 64 caratteri </mat-error>
+      <mat-error *ngIf="registerForm.get('token')?.invalid"> Il token deve contenere 64 caratteri </mat-error>
     </mat-form-field>
   </div>
   <button
