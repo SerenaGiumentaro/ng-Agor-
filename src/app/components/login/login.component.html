@@ -1,0 +1,46 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" ngModel />
+      <button mat-icon-button matSuffix>
+        <mat-icon>person</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" ngModel />
+      <button mat-icon-button matSuffix>
+        <mat-icon>email</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Token</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        name="token"
+        ngModel
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+<p>
+  Sei un nuovo utente? <a routerLink="/register">Registrati</a>
+</p>
+  <button mat-flat-button color="primary" class="login-btn" type="submit">
+    Login
+  </button>
+</form>
