@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { RegisterComponent } from './components/register/register.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -39,8 +40,12 @@ import {MatRadioModule} from '@angular/material/radio';
     MatSelectModule,
     MatRadioModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

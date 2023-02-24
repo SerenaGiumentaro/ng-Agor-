@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../interface';
 import { Router } from '@angular/router';
+import { ErrorStateMatcher } from '@angular/material/core';
 
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,6 +20,8 @@ export class RegisterComponent {
   constructor(private http: HttpClient, private route: Router) {}
   hide!: boolean;
   selectedGender!: string;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email])
+  matcher = new MyErrorStateMatcher();
 
   onSubmit(form: NgForm) {
     console.log(form.value);
@@ -35,6 +44,7 @@ export class RegisterComponent {
         next:(res:User) => {
           alert('Nuovo utente creato con successo');
           localStorage.setItem('user_id', JSON.stringify(res.id));
+          localStorage.setItem('token', form.value.token);
           this.route.navigate(['login']);
         },
         error:(err) => {

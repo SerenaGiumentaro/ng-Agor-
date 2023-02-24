@@ -3,7 +3,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput name="name" ngModel required/>
-      <button mat-icon-button matSuffix>
+      <button mat-icon-button matSuffix type="button">
         <mat-icon>person</mat-icon>
       </button>
     </mat-form-field>
@@ -11,10 +11,16 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput name="email" ngModel required/>
-      <button mat-icon-button matSuffix>
+      <input matInput name="email" ngModel required [errorStateMatcher]="matcher" [formControl]="emailFormControl"/>
+      <button mat-icon-button matSuffix type="button">
         <mat-icon>email</mat-icon>
       </button>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -24,7 +30,7 @@
         <mat-option value="Female">Female</mat-option>
         <mat-option value="Male">Male</mat-option>
       </mat-select>
-      <button mat-icon-button matSuffix>
+      <button mat-icon-button matSuffix type="button">
         <mat-icon>transgender</mat-icon>
       </button>
     </mat-form-field>
@@ -43,6 +49,7 @@
         minlength="64"
       />
       <button
+      type="button"
         mat-icon-button
         matSuffix
         (click)="hide = !hide"

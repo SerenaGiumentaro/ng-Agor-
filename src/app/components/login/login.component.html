@@ -2,8 +2,8 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput name="name" ngModel />
-      <button mat-icon-button matSuffix>
+      <input matInput name="name" ngModel required />
+      <button mat-icon-button matSuffix type="button">
         <mat-icon>person</mat-icon>
       </button>
     </mat-form-field>
@@ -11,8 +11,8 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput name="email" ngModel />
-      <button mat-icon-button matSuffix>
+      <input matInput name="email" ngModel type="email" required />
+      <button mat-icon-button matSuffix type="button">
         <mat-icon>email</mat-icon>
       </button>
     </mat-form-field>
@@ -21,26 +21,28 @@
     <mat-form-field appearance="fill">
       <mat-label>Token</mat-label>
       <input
+        required
         matInput
         [type]="hide ? 'password' : 'text'"
         name="token"
         ngModel
       />
       <button
+        type="button"
         mat-icon-button
         matSuffix
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
+        maxlength="64"
+        minlength="64"
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
     </mat-form-field>
   </div>
-<p>
-  Sei un nuovo utente? <a routerLink="/register">Registrati</a>
-</p>
-  <button mat-flat-button color="primary" class="login-btn" type="submit">
+  <p>Sei un nuovo utente? <a routerLink="/register">Registrati</a></p>
+  <button mat-flat-button color="primary" class="login-btn" type="submit" [disabled]="!loginForm.valid">
     Login
   </button>
 </form>
