@@ -1,20 +1,31 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput name="name" ngModel required />
+      <input matInput formControlName="name" required />
       <button mat-icon-button matSuffix type="button">
         <mat-icon>person</mat-icon>
       </button>
+      <mat-error *ngIf="loginForm.get('name')?.invalid">
+        Il nome deve essere di almeno 8 caratteri
+      </mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput name="email" ngModel type="email" required />
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        required
+        [errorStateMatcher]="matcher"
+      />
       <button mat-icon-button matSuffix type="button">
         <mat-icon>email</mat-icon>
       </button>
+      <mat-error *ngIf="loginForm.get('email')?.invalid"> Inserisci un indirizzo email valido </mat-error>
+
     </mat-form-field>
   </div>
   <div>
@@ -24,8 +35,8 @@
         required
         matInput
         [type]="hide ? 'password' : 'text'"
-        name="token"
-        ngModel
+        formControlName="token"
+        maxlength="64"
       />
       <button
         type="button"
@@ -34,15 +45,20 @@
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
-        maxlength="64"
-        minlength="64"
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
+      <mat-error *ngIf="loginForm.get('token')?.invalid"> Il token deve contenere 64 caratteri </mat-error>
     </mat-form-field>
   </div>
   <p>Sei un nuovo utente? <a routerLink="/register">Registrati</a></p>
-  <button mat-flat-button color="primary" class="login-btn" type="submit" [disabled]="!loginForm.valid">
+  <button
+    mat-flat-button
+    color="primary"
+    class="login-btn"
+    type="submit"
+    [disabled]="!loginForm.valid"
+  >
     Login
   </button>
 </form>
