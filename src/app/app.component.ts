@@ -11,9 +11,7 @@ export class AppComponent {
   constructor(private loginService: LoginService, private route: Router){}
   title = 'agora';
   logout(){
-
-    this.loginService.isLogginIn = false
-    localStorage.removeItem('user_id')
+    localStorage.clear()
     this.route.navigate(['login'])
 
   }
