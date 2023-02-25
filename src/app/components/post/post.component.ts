@@ -17,6 +17,6 @@ export class PostComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.post.user_id
   }
 }
