@@ -37,3 +37,31 @@ $agora-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex-center{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.status{
+  position: relative;
+  font-size: 4.5rem;
+  width: 5rem !important;
+  height: 5rem !important;
+
+  &::before{
+    content: '';
+    position: absolute;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    right: .5rem;
+    top:0.5rem;
+  }
+   &.active::before{
+    background: rgb(0, 233, 0);
+   }
+   &.inactive::before{
+    background: rgba(211, 211, 211, 0.744);
+   }
+}

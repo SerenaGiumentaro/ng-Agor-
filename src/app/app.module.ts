@@ -7,6 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
+import { PostComponent } from './components/post/post.component';
+
 // Angular Material
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -17,14 +21,19 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { RegisterComponent } from './components/register/register.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
-import { AuthInterceptor } from './auth.interceptor';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PersonalProfileComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +50,8 @@ import { AuthInterceptor } from './auth.interceptor';
     MatRadioModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatBadgeModule,
+    MatCardModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
