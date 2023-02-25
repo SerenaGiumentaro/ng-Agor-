@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -7,11 +8,13 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private loginService: LoginService){}
+  constructor(private loginService: LoginService, private route: Router){}
   title = 'agora';
   logout(){
-    
+
     this.loginService.isLogginIn = false
-    localStorage.clear()
+    localStorage.removeItem('user_id')
+    this.route.navigate(['login'])
+
   }
 }
