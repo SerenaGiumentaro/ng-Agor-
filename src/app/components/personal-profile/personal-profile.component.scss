@@ -1,1 +1,10 @@
+mat-icon{
+  width: 5rem !important;
+  height: 5rem !important;
+  font-size: 4.5rem;
 
+  &::before{
+    width: .7rem;
+    height: .7rem;
+  }
+}

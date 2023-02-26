@@ -1,0 +1,10 @@
+<mat-icon
+  class="flex-center status"
+  [ngClass]="{
+    active: user.status === 'active',
+    inactive: user.status === 'inactive'
+  }"
+  >{{ user.gender === "female" ? "face_3" : "face" }}</mat-icon
+>
+<h6>{{ user.name }}</h6>
+<p>{{ user.email }}</p>
