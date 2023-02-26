@@ -23,9 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
-
-
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,8 @@ import {MatCardModule} from '@angular/material/card';
     LoginComponent,
     RegisterComponent,
     PersonalProfileComponent,
-    PostComponent
+    PostComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +52,7 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     MatBadgeModule,
     MatCardModule,
+    MatExpansionModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

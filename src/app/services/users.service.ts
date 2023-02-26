@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
 import { User } from '../interface';
 
 @Injectable({
@@ -7,22 +8,19 @@ import { User } from '../interface';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
-  user: User = {
-    name: '',
-    email: '',
-    status: '',
-    gender: '',
-    id: 0,
-  };
+  // user: User = {
+  //   name: '',
+  //   email: '',
+  //   status: '',
+  //   gender: '',
+  //   id: 0,
+  // };
 
-  allUsers!: User[];
-
-  getUser(id: number, user:User) {
+  getUser(id: number, user: User) {
     this.http
       .get<User>(`https://gorest.co.in/public/v2/users/${id}`)
       .subscribe({
         next: (res) => {
-          console.log(res);
           (user.name = res.name),
             (user.email = res.email),
             (user.status = res.status),
@@ -34,14 +32,14 @@ export class UsersService {
       });
   }
 
-  getAllUsers(pages: number): User[] | void{
-    this.http.get<User[]>(`https://gorest.co.in/public/v2/users?page=${pages}&per_page=20`).subscribe({
-      next: res => {
-        return res
-      },
-      error: (err) => {
+  getAllUsers(page: number): Observable<User[]> {
+    return this.http.get<User[]>(
+      `https://gorest.co.in/public/v2/users?page=${page}&per_page=20`
+    ).pipe(
+      catchError((err) => {
         alert(err.message)
-      }
-    })
+        return throwError(() => err)
+      })
+    )
   }
 }
