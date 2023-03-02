@@ -25,7 +25,11 @@ export class PersonalProfileComponent implements OnInit{
 
   ngOnInit(): void {
     const id: any = localStorage.getItem('user_id')
-    this.userService.getUser(id, this.user)
+    this.userService.getUser(id).subscribe({
+      next: res => {
+        this.user = res
+      }
+    })
     this.postService.getUserPosts(id).subscribe({
       next: res => {
         this.allUserPosts = [...res]

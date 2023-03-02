@@ -26,7 +26,11 @@ export class PostComponent implements OnInit{
   }
   allPostComments!: Comment[]
   ngOnInit(): void {
-    this.userService.getUser(this.post.user_id, this.user)
+    this.userService.getUser(this.post.user_id).subscribe({
+      next: res => {
+        this.user.name = res.name
+      }
+    })
     this.commentsService.getPostComments(this.post.id).subscribe({
       next: res =>{
         this.allPostComments = [...res]
