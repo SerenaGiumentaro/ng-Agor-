@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +7,8 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private loginService: LoginService, private route: Router){}
-  title = 'agora';
+  constructor(private route: Router){}
+  title = `Agorà`;
   logout(){
     localStorage.clear()
     this.route.navigate(['login'])
