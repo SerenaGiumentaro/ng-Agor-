@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
-import { LoginService } from './services/login.service';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>
