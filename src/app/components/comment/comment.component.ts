@@ -11,7 +11,13 @@ export class CommentComponent implements OnInit {
 constructor() {
 
 }
-@Input() comment!: Comment
+@Input() comment: Comment = {
+  name: '',
+  id: 0,
+  post_id: 0,
+  email: '',
+  body: ''
+}
 
 ngOnInit(): void {
 
