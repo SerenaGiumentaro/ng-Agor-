@@ -84,7 +84,6 @@ describe('AppComponent', () => {
     const button = fixture.debugElement.query(By.css('button:last-child'));
     spyOn(app, 'logout');
     button.triggerEventHandler('click', null);
-    // fixture.detectChanges()
     expect(app.logout).toHaveBeenCalled();
   });
 

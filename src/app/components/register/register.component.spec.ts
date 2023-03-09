@@ -88,7 +88,6 @@ describe('RegisterComponent', () => {
     });
 
     component.onSubmit();
-    console.log(localStorage.getItem('token'));
     const req = httpTestingController.expectOne(
       'https://gorest.co.in/public/v2/users'
     );
