@@ -9,13 +9,6 @@ import { Post } from '../interface';
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  // post: Post = {
-  //   id: 0,
-  //   user_id: 0,
-  //   title: '',
-  //   body: '',
-  // };
-
   getUserPosts(user_id: number): Observable<Post[]> {
     return this.http
       .get<Post[]>(`https://gorest.co.in/public/v2/users/${user_id}/posts`)
