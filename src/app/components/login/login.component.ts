@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interface';
 import { LoginService } from 'src/app/services/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 export class LoginComponent implements OnInit {
   hide!: boolean;
   constructor(
-    private http: HttpClient,
     private loginService: LoginService,
     private route: Router
   ) {}
