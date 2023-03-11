@@ -14,7 +14,7 @@ export class UsersService {
       .get<User>(`https://gorest.co.in/public/v2/users/${id}`)
       .pipe(
         catchError((err) => {
-          alert(err.message);
+          console.log(err.message);
           return throwError(() => err);
         })
       );

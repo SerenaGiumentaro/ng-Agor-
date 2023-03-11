@@ -25,6 +25,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommentComponent } from './components/comment/comment.component';
+import { PostsModule } from './posts/posts.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,11 @@ import { CommentComponent } from './components/comment/comment.component';
     MatBadgeModule,
     MatCardModule,
     MatExpansionModule,
+    PostsModule,
+    DashboardModule
+  ],
+  exports: [
+    PostComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

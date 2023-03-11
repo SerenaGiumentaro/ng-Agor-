@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Post } from '../interface';
@@ -19,10 +19,13 @@ export class PostService {
         })
       );
   }
+getAllPostSize(){
+  return this.http.get('https://gorest.co.in/public/v2/posts', {observe: 'response'})
+}
 
-  getAllPosts(page: number): Observable<Post[]>{
+  getAllPosts(page: number, perPage: number): Observable<Post[]>{
     return this.http.get<Post[]>(
-      `https://gorest.co.in/public/v2/posts?page=${page}&per_page=20`
+      `https://gorest.co.in/public/v2/posts?page=${page}&per_page=${perPage}`
     ).pipe(
       catchError((err) => {
         alert(err.message)
