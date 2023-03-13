@@ -1,14 +1,19 @@
-<mat-icon
-  class="flex-center status"
-  id="icon"
-  [ngClass]="{
-    active: user.status === 'active',
-    inactive: user.status === 'inactive'
-  }"
-  >{{ user.gender === "female" ? "face_3" : "face" }}</mat-icon
->
-<h1>{{ user.name }}</h1>
-<h3>{{ user.email }}</h3>
-<div *ngFor="let post of allUserPosts">
-  <app-post [post]="post"></app-post>
+<div *ngIf="!loading">
+  <mat-icon
+    class="flex-center status"
+    id="icon"
+    [ngClass]="{
+      active: user.status === 'active',
+      inactive: user.status === 'inactive'
+    }"
+    >{{ user.gender === "female" ? "face_3" : "face" }}</mat-icon
+  >
+  <h1>{{ user.name }}</h1>
+  <h3>{{ user.email }}</h3>
+  <div *ngFor="let post of allUserPosts">
+    <app-post [post]="post"></app-post>
+  </div>
+</div>
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
 </div>

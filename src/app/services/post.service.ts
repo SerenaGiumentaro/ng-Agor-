@@ -1,6 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { postsUrl, usersUlr } from '../api.config';
 import { Post } from '../interface';
 
 @Injectable({
@@ -10,29 +16,38 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   getUserPosts(user_id: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${usersUlr}/${user_id}/posts`).pipe(
+      catchError((err) => {
+        console.error(err.message);
+        return throwError(() => err);
+      })
+    );
+  }
+  getAllPostSize(url: string) {
+    return this.http.get(url, {
+      observe: 'response',
+    });
+  }
+
+  getAllPosts(page: number, perPage: number): Observable<Post[]> {
     return this.http
-      .get<Post[]>(`https://gorest.co.in/public/v2/users/${user_id}/posts`)
+      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}`)
       .pipe(
         catchError((err) => {
-          alert(err.message);
+          console.error(err.message);
           return throwError(() => err);
         })
       );
   }
-getAllPostSize(){
-  return this.http.get('https://gorest.co.in/public/v2/posts', {observe: 'response'})
-}
 
-  getAllPosts(page: number, perPage: number): Observable<Post[]>{
-    return this.http.get<Post[]>(
-      `https://gorest.co.in/public/v2/posts?page=${page}&per_page=${perPage}`
-    ).pipe(
-      catchError((err) => {
-        alert(err.message)
-        return throwError(() => err)
-      })
-    )
+  getAllPostsBySearch(params: HttpParams, page: number, perPage: number): Observable<HttpResponse<Post[]>> {
+    return this.http
+      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}&`, { params, observe: 'response' })
+      .pipe(
+        catchError((err) => {
+          console.error(err.message);
+          return throwError(() => err);
+        })
+      );
   }
 }
-
-

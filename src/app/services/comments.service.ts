@@ -16,7 +16,7 @@ export class CommentsService {
       )
       .pipe(
         catchError((err) => {
-          alert(err.message);
+          console.error(err.message);
           return throwError(() => err);
         })
       );

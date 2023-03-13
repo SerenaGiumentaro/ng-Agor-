@@ -15,7 +15,7 @@ export class LoginService {
       params,
     }).pipe(
       catchError((err) => {
-        alert(err.message);
+        console.error(err.message);
         return throwError(() => err);
       })
     );

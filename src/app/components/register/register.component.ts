@@ -11,12 +11,13 @@ import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 })
 export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient, private route: Router) {}
-
+  loading: boolean = false
   registerForm!: FormGroup;
   hide!: boolean;
   selectedGender!: string;
   matcher = new MyErrorStateMatcher();
   ngOnInit(): void {
+    localStorage.clear()
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.minLength(8), Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true
     console.log(this.registerForm.value);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.registerForm.value.token}`,
@@ -46,19 +48,19 @@ export class RegisterComponent implements OnInit {
         { headers }
       )
       .subscribe({
-        next: (res: User) => {
+        next: () => {
           alert('Nuovo utente creato con successo');
-          localStorage.setItem('user_id', JSON.stringify(res.id));
-          localStorage.setItem('token', this.registerForm.value.token);
           this.route.navigate(['login']);
         },
         error: (err) => {
           console.log(err);
           if (err.status === 401) {
             alert('Autenticazione fallita, token non valido');
+            this.loading = false
           }
           if (err.status === 422) {
             alert(`L'utente esiste già`);
+            this.loading = false
           }
         },
       });

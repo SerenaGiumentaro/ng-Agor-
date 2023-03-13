@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
-import { PostComponent } from './components/post/post.component';
+// import { PostComponent } from './components/post/post.component';
 
 // Angular Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -24,9 +24,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CommentComponent } from './components/comment/comment.component';
 import { PostsModule } from './posts/posts.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
     LoginComponent,
     RegisterComponent,
     PersonalProfileComponent,
-    PostComponent,
-    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,10 +54,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     MatCardModule,
     MatExpansionModule,
     PostsModule,
-    DashboardModule
-  ],
-  exports: [
-    PostComponent
+    DashboardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

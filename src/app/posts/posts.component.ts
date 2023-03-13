@@ -1,5 +1,8 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { postsUrl } from '../api.config';
 import { Post } from '../interface';
 import { PostService } from '../services/post.service';
 
@@ -10,7 +13,9 @@ import { PostService } from '../services/post.service';
 })
 export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {}
-  allPosts: Post[] = [
+  searchForm!: FormGroup;
+  havePost: boolean = true
+  allPosts: Post[] | null= [
     {
       id: 0,
       user_id: 0,
@@ -25,12 +30,15 @@ export class PostsComponent implements OnInit {
   pageSizeOptions: number[] = [10, 25, 50];
   pageEvent!: PageEvent;
   ngOnInit(): void {
-    // get the total number of posts
-    this.postService.getAllPostSize().subscribe((res) => {
-      this.lenghtPosts = res.headers.get('x-pagination-total');
+    // set up search form
+    this.searchForm = new FormGroup({
+      keyword: new FormControl(),
+      typeOfSearch: new FormControl('title')
     });
+    this.getPostsSize();
     this.getAllPost(this.pageIndex, this.pageSize);
   }
+
   getAllPost(pageIndex: number, pageSize: number) {
     this.loading = true;
     this.postService.getAllPosts(pageIndex, pageSize).subscribe({
@@ -41,10 +49,41 @@ export class PostsComponent implements OnInit {
     });
   }
   handlePageEvent(e: PageEvent) {
-    console.log(e);
     this.pageEvent = e;
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
     this.getAllPost(this.pageIndex, this.pageSize);
+  }
+  getPostsSize() {
+    // get the total number of posts
+    this.postService.getAllPostSize(postsUrl).subscribe((res) => {
+      this.lenghtPosts = res.headers.get('x-pagination-total');
+    });
+  }
+
+  onSearchSubmit() {
+    this.loading = true
+console.log(this.searchForm.value)
+   const params = new HttpParams().set(
+      this.searchForm.value.typeOfSearch,
+      this.searchForm.value.keyword
+    );
+    this.postService.getAllPostsBySearch(params, this.pageIndex, this.pageSize).subscribe({
+      next: (res) => {
+        if(res.body?.length === 0){
+          this.havePost = false
+          this.loading = false
+          return
+        }
+        this.loading = false
+        this.allPosts = res.body
+        this.lenghtPosts = res.headers.get('x-pagination-total')
+        console.log( res.headers.get('x-pagination-total'))
+      },
+      error: err => {
+        console.error(err)
+      }
+    });
+
   }
 }

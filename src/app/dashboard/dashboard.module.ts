@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
 // Material
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     DashboardRoutingModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class DashboardModule { }

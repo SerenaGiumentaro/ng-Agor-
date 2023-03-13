@@ -9,7 +9,6 @@ import { of } from 'rxjs';
 import { User } from 'src/app/interface';
 import { PostService } from 'src/app/services/post.service';
 import { UsersService } from 'src/app/services/users.service';
-import { PostComponent } from '../post/post.component';
 import { PersonalProfileComponent } from './personal-profile.component';
 import { MatCardModule } from '@angular/material/card';
 
@@ -21,7 +20,7 @@ describe('PersonalProfileComponent', () => {
   let userService: UsersService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PersonalProfileComponent, PostComponent],
+      declarations: [PersonalProfileComponent],
       imports: [HttpClientTestingModule, MatCardModule],
       providers: [UsersService, PostService],
     }).compileComponents();

@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class PostComponent implements OnInit{
   constructor(private userService: UsersService, private commentsService: CommentsService){}
   hide: boolean = true
+  hasComment: boolean = true
   @Input() post :Post = {
     id: 0,
     user_id : 0,
@@ -38,6 +39,10 @@ export class PostComponent implements OnInit{
     })
     this.commentsService.getPostComments(this.post.id).subscribe({
       next: res =>{
+        if(res.length === 0){
+          this.hasComment = false
+          return
+        }
         this.allPostComments = [...res]
       },
       error: ()=> {

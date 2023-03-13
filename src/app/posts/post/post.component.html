@@ -8,11 +8,11 @@
       {{post.body}}
     </p>
   </mat-card-content>
-  <!-- <mat-card-actions>
-    <button mat-flat-button  (click)="hide = !hide" color="accent">Commenti</button>
+  <mat-card-actions *ngIf = "hasComment">
+    <button mat-flat-button  (click)="hide = !hide" color="accent">Mostra Commenti</button>
   </mat-card-actions>
-</mat-card> -->
-<!-- <div *ngFor="let comment of allPostComments">
-<app-comment *ngIf="hide" [comment]='comment'></app-comment>
-</div> -->
+</mat-card>
+<div *ngFor="let comment of allPostComments">
+<app-comment *ngIf="!hide" [comment]='comment'></app-comment>
+</div>
 

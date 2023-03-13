@@ -1,16 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <!-- <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" required />
-      <button mat-icon-button matSuffix type="button">
-        <mat-icon>person</mat-icon>
-      </button>
-      <mat-error *ngIf="loginForm.get('name')?.invalid">
-        Il nome deve essere di almeno 8 caratteri
-      </mat-error>
-    </mat-form-field>
-  </div> -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
@@ -24,8 +12,9 @@
       <button mat-icon-button matSuffix type="button">
         <mat-icon>email</mat-icon>
       </button>
-      <mat-error *ngIf="loginForm.get('email')?.invalid"> Inserisci un indirizzo email valido </mat-error>
-
+      <mat-error *ngIf="loginForm.get('email')?.invalid">
+        Inserisci un indirizzo email valido
+      </mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -48,7 +37,9 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
-      <mat-error *ngIf="loginForm.get('token')?.invalid"> Il token deve contenere 64 caratteri </mat-error>
+      <mat-error *ngIf="loginForm.get('token')?.invalid">
+        Il token deve contenere 64 caratteri
+      </mat-error>
     </mat-form-field>
   </div>
   <p>Sei un nuovo utente? <a routerLink="/register">Registrati</a></p>
@@ -62,3 +53,6 @@
     Login
   </button>
 </form>
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>

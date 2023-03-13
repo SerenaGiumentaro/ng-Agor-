@@ -14,7 +14,7 @@ export class PersonalProfileComponent implements OnInit {
     private postService: PostService
   ) {}
 
-
+loading: boolean = false
   user: User = {
     name: '',
     email: '',
@@ -25,9 +25,11 @@ export class PersonalProfileComponent implements OnInit {
   allUserPosts: Post[] = [];
 
   ngOnInit(): void {
+    this.loading= true
     const id: any = localStorage.getItem('user_id');
     this.userService.getUser(id).subscribe({
       next: (res) => {
+        this.loading = false
         this.user = res;
       },
     });
@@ -36,7 +38,7 @@ export class PersonalProfileComponent implements OnInit {
         this.allUserPosts = [...res];
       },
       error: (err) => {
-        alert(err.message);
+        console.error(err.message);
       },
     })
   }

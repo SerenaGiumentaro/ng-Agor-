@@ -12,6 +12,7 @@ import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 })
 export class LoginComponent implements OnInit {
   hide!: boolean;
+  loading: boolean = false
   constructor(
     private loginService: LoginService,
     private route: Router
@@ -31,6 +32,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true
+
     // Saving the given token in the local storage we can do search with the get call
     localStorage.setItem('token', this.loginForm.value.token);
 
@@ -45,6 +48,7 @@ export class LoginComponent implements OnInit {
           alert(`L'utente non esiste o token non valido`);
           // clear the local storage from token
           localStorage.clear();
+          this.loading = false
           return;
         }
         // if user exists save in local storage his is and the token
