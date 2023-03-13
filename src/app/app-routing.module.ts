@@ -6,12 +6,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './services/auth.guard';
 
-
 const routes: Routes = [
-  {path:'', redirectTo: '/dashboard', pathMatch:'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: PersonalProfileComponent},
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: PersonalProfileComponent,
+  },
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
@@ -20,6 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'posts',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./posts/posts.module').then((m) => m.PostsModule),
   },

@@ -15,4 +15,18 @@
 <div *ngFor="let comment of allPostComments">
 <app-comment *ngIf="!hide" [comment]='comment'></app-comment>
 </div>
+<!-- adding comment -->
+<div>
+  <form [formGroup]="addingComment" (ngSubmit)="onSubmitComment()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Aggiungi un commento...</mat-label>
+        <input matInput formControlName="comment" type="text" />
+        <button mat-icon-button matSuffix type="submit">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
 

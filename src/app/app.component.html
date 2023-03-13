@@ -1,16 +1,16 @@
 
 <mat-toolbar color="primary">
   <h1>Agorà</h1>
-  <button mat-icon-button routerLink="dashboard">
+  <button mat-icon-button routerLink="dashboard" matTooltip="Utenti">
     <mat-icon>group</mat-icon>
   </button>
-  <button mat-icon-button routerLink="posts">
+  <button mat-icon-button routerLink="posts" matTooltip="Post">
     <mat-icon>newspaper</mat-icon>
   </button>
-  <button mat-icon-button class="profile" routerLink="profile">
+  <button mat-icon-button class="profile" routerLink="profile" matTooltip="Profilo">
     <mat-icon>person</mat-icon>
   </button>
-  <button mat-icon-button (click)="logout()">
+  <button mat-icon-button (click)="logout()" matTooltip="Logout">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

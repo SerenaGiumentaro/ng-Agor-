@@ -12,8 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$agora-primary: mat.define-palette(mat.$blue-gray-palette);
-$agora-accent: mat.define-palette(mat.$light-blue-palette, 700);
+$agora-primary: mat.define-palette(mat.$red-palette, 900);
+$agora-accent: mat.define-palette(mat.$teal-palette, 300);
 
 // The warn palette is optional (defaults to red).
 $agora-warn: mat.define-palette(mat.$red-palette);
@@ -36,7 +36,7 @@ $agora-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Antic', sans-serif; }
 
 .flex-center{
   display: flex !important;
@@ -60,4 +60,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
    &.inactive::before{
     background: rgba(211, 211, 211, 0.744);
    }
+}
+
+mat-spinner{
+  width: 4rem;
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+app-login, app-register{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

@@ -27,7 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { PostsModule } from './posts/posts.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatExpansionModule,
     PostsModule,
     DashboardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

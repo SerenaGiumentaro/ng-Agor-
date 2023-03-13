@@ -9,7 +9,11 @@ import { User } from '../interface';
 export class LoginService {
   constructor(private http: HttpClient) {}
   // token: string = 'd11e8e040d7e2cb88ff136e0f80d4057b11811393f419fb0f962023acc2d2489'
+ currentUser!: User[]
 
+ getCurrentUser(){
+  return this.currentUser
+ }
   checkUser(params: HttpParams):Observable<User[]> {
     return this.http.get<User[]>('https://gorest.co.in/public/v2/users?', {
       params,
