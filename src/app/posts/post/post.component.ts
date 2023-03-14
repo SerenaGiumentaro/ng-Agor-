@@ -63,12 +63,10 @@ export class PostComponent implements OnInit {
   }
 
   onSubmitComment() {
-    console.log(this.loginService.getCurrentUser());
-    const currentUser: User[] = this.loginService.getCurrentUser();
-    const userName: string = currentUser[0].name;
-    const userEmail: string = currentUser[0].email;
-    console.log(userEmail, userName);
-
+    const currentUser: any = localStorage.getItem('user');
+    const user = JSON.parse(currentUser);
+    const userName = user.name;
+    const userEmail = user.email;
 
     this.commentsService
       .postNewComment(

@@ -1,9 +1,39 @@
+<form [formGroup]="searchUserForm" (ngSubmit)="onSearchUserSubmit()" >
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Search...</mat-label>
+      <input matInput formControlName="keyword" type="text" required />
+      <button mat-icon-button matSuffix type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="type-search">
+    <p>Ricerca per</p>
+    <mat-button-toggle-group formControlName="typeOfSearch">
+      <mat-button-toggle value="name" >Nome</mat-button-toggle>
+      <mat-button-toggle value="email">Email</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</form>
 <div *ngIf="!loading">
   <div *ngFor="let user of users" >
     <app-user [user]="user"></app-user>
   </div>
+  <mat-paginator
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageIndex"
+  [pageSize]="pageSize"
+  aria-label="Select page"
+  (page)="handlePageEvent($event)"
+  [length]="lenghtUsers"
+>
+</mat-paginator>
 </div>
-
+<div *ngIf="!haveUser">
+  <p>Nessun risultato trovato, provare con un altra ricerca.</p>
+</div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>

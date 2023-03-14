@@ -14,9 +14,9 @@ import { PostService } from '../services/post.service';
 export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {}
   searchForm!: FormGroup;
-  hideNewPost: boolean = true
-  havePost: boolean = true
-  allPosts: Post[] | null= [
+  hideNewPost: boolean = true;
+  havePost: boolean = true;
+  allPosts: Post[] | null = [
     {
       id: 0,
       user_id: 0,
@@ -34,9 +34,8 @@ export class PostsComponent implements OnInit {
     // set up search form
     this.searchForm = new FormGroup({
       keyword: new FormControl(),
-      typeOfSearch: new FormControl('title')
+      typeOfSearch: new FormControl('title'),
     });
-    this.getPostsSize();
     this.getAllPost(this.pageIndex, this.pageSize);
   }
 
@@ -44,7 +43,8 @@ export class PostsComponent implements OnInit {
     this.loading = true;
     this.postService.getAllPosts(pageIndex, pageSize).subscribe({
       next: (res) => {
-        this.allPosts = [...res];
+        this.allPosts = res.body;
+        this.lenghtPosts = res.headers.get('x-pagination-total');
         this.loading = false;
       },
     });
@@ -55,36 +55,29 @@ export class PostsComponent implements OnInit {
     this.pageSize = e.pageSize;
     this.getAllPost(this.pageIndex, this.pageSize);
   }
-  getPostsSize() {
-    // get the total number of posts
-    this.postService.getAllPostSize(postsUrl).subscribe((res) => {
-      this.lenghtPosts = res.headers.get('x-pagination-total');
-    });
-  }
 
   onSearchSubmit() {
-    this.loading = true
-console.log(this.searchForm.value)
-   const params = new HttpParams().set(
+    this.loading = true;
+    const params = new HttpParams().set(
       this.searchForm.value.typeOfSearch,
       this.searchForm.value.keyword
     );
-    this.postService.getAllPostsBySearch(params, this.pageIndex, this.pageSize).subscribe({
-      next: (res) => {
-        if(res.body?.length === 0){
-          this.havePost = false
-          this.loading = false
-          return
-        }
-        this.loading = false
-        this.allPosts = res.body
-        this.lenghtPosts = res.headers.get('x-pagination-total')
-        console.log( res.headers.get('x-pagination-total'))
-      },
-      error: err => {
-        console.error(err)
-      }
-    });
-
+    this.postService
+      .getAllPostsBySearch(params, this.pageIndex, this.pageSize)
+      .subscribe({
+        next: (res) => {
+          if (res.body?.length === 0) {
+            this.havePost = false;
+            this.loading = false;
+            return;
+          }
+          this.loading = false;
+          this.allPosts = res.body;
+          this.lenghtPosts = res.headers.get('x-pagination-total');
+        },
+        error: (err) => {
+          console.error(`Posts search error: ${err.message}`);
+        },
+      });
   }
 }

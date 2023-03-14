@@ -1,4 +1,4 @@
-import {
+ import {
   HttpClient,
   HttpHeaders,
   HttpParams,
@@ -29,9 +29,9 @@ export class PostService {
     });
   }
 
-  getAllPosts(page: number, perPage: number): Observable<Post[]> {
+  getAllPosts(page: number, perPage: number): Observable<HttpResponse<Post[]>> {
     return this.http
-      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}`)
+      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}`, {observe: 'response'})
       .pipe(
         catchError((err) => {
           console.error(`Post Service getting all posts: ${err.message}`);

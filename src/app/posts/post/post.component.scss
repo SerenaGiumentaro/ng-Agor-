@@ -1,3 +1,17 @@
 mat-card-title{
   font-weight: 600;
 }
+.post{
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  width: 70%;
+  min-width: 250px;
+  align-self: center;
+  margin: 2rem 0;
+}
+mat-form-field{
+  width: 100%;
+}
+
+.comment{
+  margin-top: 1rem;
+}

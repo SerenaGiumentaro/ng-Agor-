@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  min-width: 250px;
+  width: 30%;
+}
+mat-form-field {
+  width: 100%;
+}
+.type-search {
+  display: flex;
+  justify-content: space-between;
+}

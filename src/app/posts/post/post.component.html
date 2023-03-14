@@ -1,33 +1,38 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>{{ post.title }}</mat-card-title>
-    <mat-card-subtitle>{{ user.name }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{ post.body }}
-    </p>
-  </mat-card-content>
-  <mat-card-actions *ngIf="hasComment">
-    <button mat-flat-button (click)="hide = !hide" color="accent">
-      {{ hide ? "Mostra Commenti" : "Nascondi Commenti" }}
-    </button>
-  </mat-card-actions>
+
+<div class="post">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ post.title }}</mat-card-title>
+      <mat-card-subtitle>{{ user.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{ post.body }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="hasComment">
+      <button mat-flat-button (click)="hide = !hide" color="accent">
+        {{ hide ? "Mostra Commenti" : "Nascondi Commenti" }}
+        <mat-icon>comment</mat-icon>
+      </button>
+    </mat-card-actions>
+
+  <div *ngFor="let comment of allPostComments">
+    <app-comment *ngIf="!hide" [comment]="comment"></app-comment>
+  </div>
+  <!-- adding comment -->
+  <div class="comment">
+    <form [formGroup]="addingComment" (ngSubmit)="onSubmitComment()">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Aggiungi un commento...</mat-label>
+          <input matInput formControlName="comment" type="text" />
+          <button mat-icon-button matSuffix type="submit">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
 </mat-card>
-<div *ngFor="let comment of allPostComments">
-  <app-comment *ngIf="!hide" [comment]="comment"></app-comment>
-</div>
-<!-- adding comment -->
-<div>
-  <form [formGroup]="addingComment" (ngSubmit)="onSubmitComment()">
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Aggiungi un commento...</mat-label>
-        <input matInput formControlName="comment" type="text" />
-        <button mat-icon-button matSuffix type="submit">
-          <mat-icon>send</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-  </form>
 </div>

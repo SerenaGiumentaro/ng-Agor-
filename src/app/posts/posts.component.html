@@ -8,18 +8,16 @@
       </button>
     </mat-form-field>
   </div>
-  <div>
+  <div class="type-search">
     <p>Ricerca per</p>
     <mat-button-toggle-group formControlName="typeOfSearch">
-      <mat-button-toggle value="title" >Titolo</mat-button-toggle>
+      <mat-button-toggle value="title">Titolo</mat-button-toggle>
       <mat-button-toggle value="body">Post</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 </form>
-<button mat-flat-button
-color="primary" (click)="hideNewPost = !hideNewPost"> + New Post</button>
-<div *ngIf="!hideNewPost">
-  <app-new-post></app-new-post>
+<div class="new-post">
+    <app-new-post></app-new-post>
 </div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
