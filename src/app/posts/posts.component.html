@@ -16,7 +16,11 @@
     </mat-button-toggle-group>
   </div>
 </form>
-
+<button mat-flat-button
+color="primary" (click)="hideNewPost = !hideNewPost"> + New Post</button>
+<div *ngIf="!hideNewPost">
+  <app-new-post></app-new-post>
+</div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>

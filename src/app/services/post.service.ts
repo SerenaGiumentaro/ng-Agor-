@@ -18,7 +18,7 @@ export class PostService {
   getUserPosts(user_id: number): Observable<Post[]> {
     return this.http.get<Post[]>(`${usersUlr}/${user_id}/posts`).pipe(
       catchError((err) => {
-        console.error(err.message);
+        console.error(`Post Service getting user post: ${err.message}`);
         return throwError(() => err);
       })
     );
@@ -34,7 +34,7 @@ export class PostService {
       .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}`)
       .pipe(
         catchError((err) => {
-          console.error(err.message);
+          console.error(`Post Service getting all posts: ${err.message}`);
           return throwError(() => err);
         })
       );
@@ -45,9 +45,18 @@ export class PostService {
       .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}&`, { params, observe: 'response' })
       .pipe(
         catchError((err) => {
-          console.error(err.message);
+          console.error(`Post Service research: ${err.message}`);
           return throwError(() => err);
         })
       );
+  }
+
+  newPost(id: number, title: string, body: string){
+    return this.http.post(`${usersUlr}/${id}/posts`, {title: title, body: body}).pipe(
+      catchError((err)=> {
+        console.error(`Post Service creating new post: ${err.message}`)
+        return throwError(()=> err)
+      })
+    )
   }
 }

@@ -14,6 +14,7 @@ import { PostService } from '../services/post.service';
 export class PostsComponent implements OnInit {
   constructor(private postService: PostService) {}
   searchForm!: FormGroup;
+  hideNewPost: boolean = true
   havePost: boolean = true
   allPosts: Post[] | null= [
     {

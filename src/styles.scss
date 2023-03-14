@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $agora-primary: mat.define-palette(mat.$red-palette, 900);
-$agora-accent: mat.define-palette(mat.$teal-palette, 300);
+$agora-accent: mat.define-palette(mat.$teal-palette, 900);
 
 // The warn palette is optional (defaults to red).
 $agora-warn: mat.define-palette(mat.$red-palette);

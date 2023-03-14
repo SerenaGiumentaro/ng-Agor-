@@ -1,0 +1,22 @@
+<form [formGroup]="newPost" (ngSubmit)="onNewPostSubmit()">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Titolo</mat-label>
+      <input matInput formControlName="title" type="text" required placeholder="Inserisci un titolo..."/>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Post</mat-label>
+      <textarea matInput formControlName="body" required placeholder="Scrivi il tuo post..."></textarea>
+    </mat-form-field>
+  </div>
+  <button
+  mat-flat-button
+  color="primary"
+  type="submit"
+  [disabled]="!newPost.valid"
+>
+  Invia
+</button>
+</form>

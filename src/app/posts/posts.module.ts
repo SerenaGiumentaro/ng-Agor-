@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { NewPostComponent } from './new-post/new-post.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     PostsComponent,
     PostComponent,
     CommentComponent,
+    NewPostComponent,
   ],
   imports: [
     CommonModule,
