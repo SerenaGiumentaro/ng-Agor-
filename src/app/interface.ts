@@ -5,6 +5,12 @@ export interface User {
   gender: string,
   status: string
 }
+export interface UserBody {
+  name:string,
+  email: string,
+  gender: string,
+  status: string
+}
 
 export interface Post {
   id: number,

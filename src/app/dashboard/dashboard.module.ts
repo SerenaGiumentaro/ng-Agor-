@@ -15,6 +15,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { UserDataComponent } from './user-data/user-data.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import { UserDataComponent } from './user-data/user-data.component';
     DashboardComponent,
     UsersComponent,
     UserComponent,
-    UserDataComponent
+    UserDataComponent,
+    NewUserComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +40,8 @@ import { UserDataComponent } from './user-data/user-data.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ]
 })
 export class DashboardModule { }

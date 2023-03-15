@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.loading = true
-    console.log(this.registerForm.value);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.registerForm.value.token}`,
     });
@@ -53,7 +52,7 @@ export class RegisterComponent implements OnInit {
           this.route.navigate(['login']);
         },
         error: (err) => {
-          console.log(err);
+          console.error(`Register error: ${err.message}`);
           if (err.status === 401) {
             alert('Autenticazione fallita, token non valido');
             this.loading = false

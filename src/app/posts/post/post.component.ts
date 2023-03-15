@@ -32,7 +32,7 @@ export class PostComponent implements OnInit {
     gender: '',
     id: 0,
   };
-  allPostComments!: Comment[];
+  allPostComments: Comment[] = [];
   addingComment!: FormGroup;
   ngOnInit(): void {
     // set up comment form
@@ -88,5 +88,8 @@ export class PostComponent implements OnInit {
       body: this.addingComment.value.comment,
     });
     this.addingComment.reset();
-  }
+    this.addingComment.markAsUntouched()
+    this.addingComment.markAsPristine()
+
+    }
 }

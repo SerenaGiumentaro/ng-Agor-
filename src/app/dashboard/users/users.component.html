@@ -3,7 +3,7 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Search...</mat-label>
-      <input matInput formControlName="keyword" type="text" required />
+      <input matInput formControlName="keyword" type="text" #inputKeyword/>
       <button mat-icon-button matSuffix type="submit">
         <mat-icon>search</mat-icon>
       </button>
@@ -17,6 +17,9 @@
     </mat-button-toggle-group>
   </div>
 </form>
+<div *ngIf="!haveUser">
+  <p>Nessun risultato trovato, provare con un altra ricerca.</p>
+</div>
 <div *ngIf="!loading">
   <div *ngFor="let user of users" >
     <app-user [user]="user"></app-user>
@@ -30,9 +33,6 @@
   [length]="lenghtUsers"
 >
 </mat-paginator>
-</div>
-<div *ngIf="!haveUser">
-  <p>Nessun risultato trovato, provare con un altra ricerca.</p>
 </div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>

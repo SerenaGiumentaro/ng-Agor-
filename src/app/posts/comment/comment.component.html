@@ -1,4 +1,11 @@
-<div>
-<h6> {{comment.name}} </h6>
-<p> {{comment.body}} </p>
+<div class="comment">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ comment.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ comment.body }}</p>
+    </mat-card-content>
+  </mat-card>
 </div>
+
