@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   haveUser: boolean = true;
   loading: boolean = false;
   searchUserForm!: FormGroup;
-  users!: User[] | null;
+  users!: User[] | null | undefined;
   // pagination
   lenghtUsers!: string | null;
   pageIndex: number = 1;
@@ -29,18 +29,14 @@ export class UsersComponent implements OnInit {
       keyword: new FormControl(),
       typeOfSearch: new FormControl('name'),
     });
-    this.userService.getAllUsers(this.pageIndex, this.pageSize).subscribe({
-      next: (res) => {
-        this.loading = false;
-        this.users = res.body;
-        this.lenghtUsers = res.headers.get('x-pagination-total');
-      },
-    });
+    this.getAllUsers(this.pageIndex, this.pageSize)
   }
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
+    this.getAllUsers(this.pageIndex, this.pageSize)
+
   }
 
   onSearchUserSubmit() {
@@ -66,6 +62,22 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => {
         console.error(`Search user error: ${err.message}`);
+      },
+    });
+
+
+  }
+  updateUserView(e: number){
+    this.users = this.users?.filter(user => user.id !== e)
+  }
+
+  getAllUsers(pageIndex: number, pageSize: number){
+    this.loading = true
+    this.userService.getAllUsers(pageIndex, pageSize).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.users = res.body;
+        this.lenghtUsers = res.headers.get('x-pagination-total');
       },
     });
   }

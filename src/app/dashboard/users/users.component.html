@@ -21,8 +21,8 @@
   <p>Nessun risultato trovato, provare con un altra ricerca.</p>
 </div>
 <div *ngIf="!loading">
-  <div *ngFor="let user of users" >
-    <app-user [user]="user"></app-user>
+  <div *ngFor="let user of users">
+    <app-user [user]="user" (updateUser)="updateUserView($event)"></app-user>
   </div>
   <mat-paginator
   [pageSizeOptions]="pageSizeOptions"

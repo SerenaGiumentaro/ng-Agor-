@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -16,15 +16,16 @@ export class UserComponent {
   gender:'',
   id: 0
 }
+@Output() updateUser: EventEmitter<number> = new EventEmitter<number>()
 haveUserData(){
-  console.log(this.user)
+
 }
 
 deleteUser(){
   // aggiungi una dialog di conferma
   this.userService.deleteUser(this.user.id).subscribe({
-    next: res => {
-      console.log(res)
+    next: () => {
+      this.updateUser.emit(this.user.id)
       alert('Utente Eliminato')
     },
     error: err => {

@@ -1,13 +1,15 @@
-mat-icon{
-  width: 3rem !important;
-  height: 3rem !important;
-  font-size: 2.5rem;
-  align-self: center;
-  &::before{
-    width: .4rem;
-    height: .4rem;
-    right: 0;
-    top:0;
+.face{
+  mat-icon{
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 2.5rem;
+    align-self: center;
+    &::before{
+      width: .4rem;
+      height: .4rem;
+      right: 0;
+      top:0;
+    }
   }
 }
 .user{
@@ -18,8 +20,16 @@ mat-icon{
   padding: 1rem;
   margin: 1.5rem 0;
   cursor: pointer;
+  position: relative;
+
 }
 .user-data{
   margin: 0 1.5rem;
 }
+.delete{
+  position: absolute;
+  right: 10px;
+
+
+ }
 

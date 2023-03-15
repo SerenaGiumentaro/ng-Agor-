@@ -18,6 +18,7 @@ import { UserDataComponent } from './user-data/user-data.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
+    MatTooltipModule,
   ]
 })
 export class DashboardModule { }

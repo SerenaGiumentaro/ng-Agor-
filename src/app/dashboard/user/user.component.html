@@ -1,6 +1,7 @@
 
 <div class="user" (click)="haveUserData()">
-  <mat-icon
+  <div class="face">
+    <mat-icon
     class="flex-center status"
     [ngClass]="{
       active: user.status === 'active',
@@ -8,12 +9,13 @@
     }"
     >{{ user.gender === "female" ? "face_3" : "face" }}</mat-icon
   >
+  </div>
   <div class="user-data">
     <h4>{{ user.name }}</h4>
     <p>{{ user.email }}</p>
   </div>
   <div class="delete">
-    <button  mat-mini-fab color="warn" (click)="deleteUser()" >
+    <button mat-icon-button color="warn" (click)="deleteUser()" matTooltip="Cancella Utente">
       <mat-icon>person_remove</mat-icon>
     </button>
   </div>
