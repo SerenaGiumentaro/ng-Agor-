@@ -1,1 +1,5 @@
-<p>user-data works!</p>
+<p>{{user.name}}</p>
+<p>  {{user.email}}  </p>
+<div *ngFor="let post of allPosts">
+  <app-post [post]="post"></app-post>
+</div>

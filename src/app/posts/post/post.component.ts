@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Comment, Post, User } from 'src/app/interface';
 import { CommentsService } from 'src/app/services/comments.service';
@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   ) {}
   hide: boolean = true;
   hasComment: boolean = true;
+  @ViewChild('commentInput') commentInput!: ElementRef;
   @Input() post: Post = {
     id: 0,
     user_id: 0,
@@ -87,9 +88,8 @@ export class PostComponent implements OnInit {
       email: userEmail,
       body: this.addingComment.value.comment,
     });
+    this.hasComment = true;
     this.addingComment.reset();
-    this.addingComment.markAsUntouched()
-    this.addingComment.markAsPristine()
-
-    }
+    this.commentInput.nativeElement.blur();
+  }
 }

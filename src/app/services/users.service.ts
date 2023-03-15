@@ -9,8 +9,10 @@ import { User, UserBody } from '../interface';
 })
 export class UsersService {
   constructor(private http: HttpClient) {}
-
-
+selectedUser!: User
+getSelectedUser(){
+  return this.selectedUser
+}
 getUser(id: number): Observable<User> {
     return this.http
       .get<User>(`https://gorest.co.in/public/v2/users/${id}`)

@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UsersComponent implements OnInit {
   constructor(private userService: UsersService) {}
-  @ViewChild('inputKeyword')  inputKeyword! : ElementRef
+  @ViewChild('inputKeyword') inputKeyword!: ElementRef;
   haveUser: boolean = true;
   loading: boolean = false;
   searchUserForm!: FormGroup;
@@ -29,19 +29,18 @@ export class UsersComponent implements OnInit {
       keyword: new FormControl(),
       typeOfSearch: new FormControl('name'),
     });
-    this.getAllUsers(this.pageIndex, this.pageSize)
+    this.getAllUsers(this.pageIndex, this.pageSize);
   }
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
-    this.getAllUsers(this.pageIndex, this.pageSize)
-
+    this.getAllUsers(this.pageIndex, this.pageSize);
   }
 
   onSearchUserSubmit() {
-    this.loading = true
-    this.haveUser = true
+    this.loading = true;
+    this.haveUser = true;
     const params = new HttpParams().set(
       this.searchUserForm.value.typeOfSearch,
       this.searchUserForm.value.keyword
@@ -56,23 +55,20 @@ export class UsersComponent implements OnInit {
         this.loading = false;
         this.users = res.body;
         this.lenghtUsers = res.headers.get('x-pagination-total');
-        this.searchUserForm.reset()
-        this.inputKeyword?.nativeElement.blur()
-
+        this.searchUserForm.reset();
+        this.inputKeyword?.nativeElement.blur();
       },
       error: (err) => {
         console.error(`Search user error: ${err.message}`);
       },
     });
-
-
   }
-  updateUserView(e: number){
-    this.users = this.users?.filter(user => user.id !== e)
+  updateUserView(e: number) {
+    this.users = this.users?.filter((user) => user.id !== e);
   }
 
-  getAllUsers(pageIndex: number, pageSize: number){
-    this.loading = true
+  getAllUsers(pageIndex: number, pageSize: number) {
+    this.loading = true;
     this.userService.getAllUsers(pageIndex, pageSize).subscribe({
       next: (res) => {
         this.loading = false;

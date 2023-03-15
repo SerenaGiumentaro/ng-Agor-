@@ -19,6 +19,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { PostsModule } from '../posts/posts.module';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatOptionModule,
     MatSelectModule,
     MatTooltipModule,
+    PostsModule,
   ]
 })
 export class DashboardModule { }

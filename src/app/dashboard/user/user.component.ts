@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -7,8 +8,11 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
-  constructor(private userService: UsersService){}
+export class UserComponent implements OnInit{
+  constructor(private userService: UsersService, private activateRoute: ActivatedRoute){}
+  ngOnInit(): void {
+    this.activateRoute.snapshot.paramMap.get("id")
+  }
 @Input() user: User ={
   name: '',
   email: '',
@@ -17,8 +21,8 @@ export class UserComponent {
   id: 0
 }
 @Output() updateUser: EventEmitter<number> = new EventEmitter<number>()
-haveUserData(){
-
+sendUserData(){
+  this.userService.selectedUser = this.user
 }
 
 deleteUser(){
