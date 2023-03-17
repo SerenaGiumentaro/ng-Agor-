@@ -1,5 +1,5 @@
 
-<div class="user" (click)="sendUserData()" routerLink="user/{{user.id}}">
+<div class="user" >
   <div class="face">
     <mat-icon
     class="flex-center status"
@@ -11,7 +11,9 @@
   >
   </div>
   <div class="user-data">
-    <h4>{{ user.name }}</h4>
+    <a (click)="sendUserData()" routerLink="user/{{user.id}}">
+      <h4>{{ user.name }}</h4>
+    </a>
     <p>{{ user.email }}</p>
   </div>
   <div class="delete">

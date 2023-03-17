@@ -16,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NewPostComponent } from './new-post/new-post.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { NewPostComponent } from './new-post/new-post.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatSnackBarModule,
   ],
   exports: [
     PostComponent,

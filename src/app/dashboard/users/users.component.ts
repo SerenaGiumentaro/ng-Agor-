@@ -55,8 +55,8 @@ export class UsersComponent implements OnInit {
         this.loading = false;
         this.users = res.body;
         this.lenghtUsers = res.headers.get('x-pagination-total');
-        this.searchUserForm.reset();
         this.inputKeyword?.nativeElement.blur();
+        this.searchUserForm.get('keyword')?.reset()
       },
       error: (err) => {
         console.error(`Search user error: ${err.message}`);

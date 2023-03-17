@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserBody } from 'src/app/interface';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
@@ -33,9 +33,18 @@ export class NewUserComponent implements OnInit{
     this.userService.newUser(user).subscribe({
       next: ()=> {
         this.loading = false
+        this.newUserForm.reset()
+        Object.keys(this.newUserForm.controls).forEach(key => {
+          this.newUserForm.get(key)?.setErrors(null)
+        })
         alert(`Nuovo utente creato con successo`)
       },
       error: err => {
+        this.loading = false
+        if(err.status = 422){
+          alert('Dati mancanti')
+          return
+        }
         console.error(`Creating new user: ${err.message}`)
         alert(`Qualcosa è andato storto...`)
       }

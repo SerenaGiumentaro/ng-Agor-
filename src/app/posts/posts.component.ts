@@ -74,6 +74,7 @@ export class PostsComponent implements OnInit {
           this.loading = false;
           this.allPosts = res.body;
           this.lenghtPosts = res.headers.get('x-pagination-total');
+          this.searchForm.get('keyword')?.reset()
         },
         error: (err) => {
           console.error(`Posts search error: ${err.message}`);

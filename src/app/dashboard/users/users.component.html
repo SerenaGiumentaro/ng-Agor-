@@ -1,4 +1,4 @@
-<form [formGroup]="searchUserForm" (ngSubmit)="onSearchUserSubmit()" >
+<form [formGroup]="searchUserForm" (ngSubmit)="onSearchUserSubmit()">
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Search...</mat-label>
@@ -19,7 +19,8 @@
 <div *ngIf="!haveUser">
   <p>Nessun risultato trovato, provare con un altra ricerca.</p>
 </div>
-<div *ngIf="!loading">
+<app-new-user></app-new-user>
+<div *ngIf="haveUser">
   <div *ngFor="let user of users">
     <app-user [user]="user" (updateUser)="updateUserView($event)"></app-user>
   </div>
