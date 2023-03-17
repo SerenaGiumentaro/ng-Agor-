@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService } from 'src/app/dialog.service';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/services/users.service';
@@ -14,6 +15,7 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private activateRoute: ActivatedRoute,
+    private dialogService: DialogService,
     private dialog: MatDialog
   ) {}
   ngOnInit(): void {
@@ -30,14 +32,8 @@ export class UserComponent implements OnInit {
   sendUserData() {
     this.userService.selectedUser = this.user;
   }
-  drawDialog(data: {}) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = data;
-
-    return this.dialog.open(DialogComponent, dialogConfig);
-  }
   deleteUser() {
-    let dialogRef = this.drawDialog({
+    let dialogRef = this.dialogService.drawDialog(this.dialog, {
       title: 'Cancella Utente',
       body: `Vuoi cancellare l'utente?`,
       isDenialNeeded: true,
@@ -47,19 +43,24 @@ export class UserComponent implements OnInit {
         this.userService.deleteUser(this.user.id).subscribe({
           next: () => {
             this.updateUser.emit(this.user.id);
-            const dialogRef = this.drawDialog({
+            this.dialogService.drawDialog(this.dialog, {
               title: `Utente eliminato`,
-              body:'',
-              isDenialNeeded : false
-            })
+              body: '',
+              isDenialNeeded: false,
+            });
           },
           error: (err) => {
+            if (err.status === 0) {
+              this.dialogService.drawDialog(this.dialog, {
+                title: 'Errore dal server',
+                body: '',
+                isDenialNeeded: false,
+              });
+            }
             console.error(`Delete user error: ${err.message}`);
           },
         });
       }
-      return;
     });
-    // aggiungi una dialog di conferma
   }
 }

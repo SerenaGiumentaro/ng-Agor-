@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from 'src/app/dialog.service';
 import { Comment, Post, User } from 'src/app/interface';
 import { CommentsService } from 'src/app/services/comments.service';
-import { LoginService } from 'src/app/services/login.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -13,8 +14,9 @@ import { UsersService } from 'src/app/services/users.service';
 export class PostComponent implements OnInit {
   constructor(
     private userService: UsersService,
-    private loginService: LoginService,
-    private commentsService: CommentsService
+    private commentsService: CommentsService,
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {}
   hide: boolean = true;
   hasComment: boolean = true;
@@ -45,8 +47,10 @@ export class PostComponent implements OnInit {
       next: (res) => {
         this.user.name = res.name;
       },
-      error: () => {
-        this.user.name = 'Utente Sconosciuto';
+      error: (err) => {
+        if (err.status === 404) {
+          this.user.name = 'Utente Sconosciuto';
+        }
       },
     });
     this.commentsService.getPostComments(this.post.id).subscribe({
@@ -58,7 +62,7 @@ export class PostComponent implements OnInit {
         this.allPostComments = [...res];
       },
       error: (err) => {
-        console.error(err);
+        console.error(`Comment error: ${err.message}`);
       },
     });
   }
@@ -78,7 +82,35 @@ export class PostComponent implements OnInit {
       )
       .subscribe({
         error: (err) => {
-          console.error(err);
+          switch (err.status) {
+            case 422:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Dati mancanti`,
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            case 0:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore del server`,
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            default: {
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore sconosciuto`,
+                  isDenialNeeded: false,
+                });
+              }
+            }
+          }
         },
       });
     this.allPostComments.push({
@@ -89,6 +121,7 @@ export class PostComponent implements OnInit {
       body: this.addingComment.value.comment,
     });
     this.hasComment = true;
+    this.hide = false;
     this.addingComment.reset();
     this.commentInput.nativeElement.blur();
   }

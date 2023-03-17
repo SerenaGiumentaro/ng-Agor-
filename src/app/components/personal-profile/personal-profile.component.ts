@@ -1,4 +1,6 @@
-import { Component, OnInit , AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from 'src/app/dialog.service';
 import { Post, User } from 'src/app/interface';
 import { PostService } from 'src/app/services/post.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -11,13 +13,15 @@ import { UsersService } from 'src/app/services/users.service';
 export class PersonalProfileComponent implements OnInit, AfterViewInit {
   constructor(
     private userService: UsersService,
-    private postService: PostService
+    private postService: PostService,
+    private dialogService: DialogService,
+    private dialog: MatDialog
   ) {}
   ngAfterViewInit(): void {
-    this.loading= true
+    this.loading = true;
   }
 
-loading: boolean = false
+  loading: boolean = false;
   user: User = {
     name: '',
     email: '',
@@ -35,18 +39,23 @@ loading: boolean = false
     //     this.user = res;
     //   },
     // });
-    const currentUser :any=  localStorage.getItem('user')
-    this.user = JSON.parse(currentUser)
+    const currentUser: any = localStorage.getItem('user');
+    this.user = JSON.parse(currentUser);
     this.postService.getUserPosts(id).subscribe({
       next: (res) => {
         this.allUserPosts = [...res];
-        this.loading = false
+        this.loading = false;
       },
       error: (err) => {
-        console.error(err.message);
+        this.loading = false
+        if (err.status === 0) {
+          this.dialogService.drawDialog(this.dialog, {
+            title: 'Errore dal server',
+            body: '',
+            isDenialNeeded: false,
+          });
+        }
       },
-    })
+    });
   }
-
-
 }

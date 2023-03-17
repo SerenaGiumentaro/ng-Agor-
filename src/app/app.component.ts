@@ -6,26 +6,25 @@ import { LoginService } from './services/login.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private loginService: LoginService, private dialog: MatDialog){}
+  constructor(private loginService: LoginService, private dialog: MatDialog) {}
   title = `Agorà`;
 
-  logout(){
-    const dialogConfig = new MatDialogConfig()
+  logout() {
+    const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       title: 'Logout',
       body: `Vuoi uscire dall'applicazione?`,
-      isDenialNeeded : true
-    }
-    let dialogRef = this.dialog.open(DialogComponent, dialogConfig)
-    dialogRef.afterClosed().subscribe( res => {
-      if(res){
-        this.loginService.logout()
+      isDenialNeeded: true,
+    };
+    let dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.loginService.logout();
       }
-      return
-    })
-
+      return;
+    });
   }
 }

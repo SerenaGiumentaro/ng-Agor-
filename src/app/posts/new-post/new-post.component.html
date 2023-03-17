@@ -33,6 +33,10 @@
     >
       <mat-icon>post_add</mat-icon>
       Aggiungi Post
+      <div *ngIf="loading">
+        <mat-spinner></mat-spinner>
+      </div>
     </button>
   </form>
 </div>
+

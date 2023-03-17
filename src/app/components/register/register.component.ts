@@ -4,20 +4,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../interface';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from 'src/app/dialog.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private http: HttpClient, private route: Router) {}
-  loading: boolean = false
+  constructor(
+    private http: HttpClient,
+    private route: Router,
+    private dialog: MatDialog,
+    private dialogService: DialogService
+  ) {}
+  loading: boolean = false;
   registerForm!: FormGroup;
   hide!: boolean;
   selectedGender!: string;
   matcher = new MyErrorStateMatcher();
   ngOnInit(): void {
-    localStorage.clear()
+    localStorage.clear();
     this.registerForm = new FormGroup({
       name: new FormControl('', [Validators.minLength(8), Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -30,7 +37,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true
+    this.loading = true;
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.registerForm.value.token}`,
     });
@@ -48,18 +55,52 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          alert('Nuovo utente creato con successo');
+          this.dialogService.drawDialog(this.dialog, {
+            title: `Nuovo utente creato con successo`,
+            body: '',
+            isDenialNeeded: false,
+          });
           this.route.navigate(['login']);
         },
         error: (err) => {
-          console.error(`Register error: ${err.message}`);
-          if (err.status === 401) {
-            alert('Autenticazione fallita, token non valido');
-            this.loading = false
-          }
-          if (err.status === 422) {
-            alert(`L'utente esiste già`);
-            this.loading = false
+          this.loading = false;
+          switch (err.status) {
+            case 401:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: 'Token non valido',
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            case 422:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `L'utente esiste già`,
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            case 0:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore del server`,
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            default: {
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore sconosciuto`,
+                  isDenialNeeded: false,
+                });
+              }
+            }
           }
         },
       });

@@ -15,7 +15,7 @@
         <mat-icon>comment</mat-icon>
       </button>
     </mat-card-actions>
-    <div  *ngIf="!hide">
+    <div *ngIf="!hide">
       <p class="no-comments" *ngIf="!hasComment">Non ci sono commenti</p>
       <div *ngFor="let comment of allPostComments">
         <app-comment [comment]="comment"></app-comment>
@@ -26,7 +26,13 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Aggiungi un commento...</mat-label>
-            <input matInput formControlName="comment" type="text" #commentInput/>
+            <input
+              matInput
+              formControlName="comment"
+              type="text"
+              #commentInput
+              maxlength="500"
+            />
             <button mat-icon-button matSuffix type="submit">
               <mat-icon>send</mat-icon>
             </button>
