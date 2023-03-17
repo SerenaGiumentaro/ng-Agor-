@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  min-width: 250px;
+  width: 30%;
+}
+.type-search {
+  display: flex;
+  justify-content: space-between;
+}
+mat-form-field {
+  width: 100%;
+}
+.new-post {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+
+
+  button {
+    margin: 2rem 0;
+  }
+}

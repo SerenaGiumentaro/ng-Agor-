@@ -1,0 +1,35 @@
+.face{
+  mat-icon{
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 2.5rem;
+    align-self: center;
+    &::before{
+      width: .4rem;
+      height: .4rem;
+      right: 0;
+      top:0;
+    }
+  }
+}
+.user{
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  width: 80%;
+  min-width: 200px;
+  display: flex;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  cursor: default;
+  position: relative;
+
+}
+.user-data{
+  margin: 0 1.5rem;
+}
+.delete{
+  position: absolute;
+  right: 10px;
+
+
+ }
+

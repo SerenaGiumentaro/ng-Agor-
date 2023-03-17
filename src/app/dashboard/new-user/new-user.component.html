@@ -1,0 +1,62 @@
+<form
+  [formGroup]="newUserForm"
+  (ngSubmit)="onSubmitNewUser()"
+  class="flex-center"
+>
+  <h3>Aggiungi Utente</h3>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" required/>
+      <button mat-icon-button matSuffix type="button">
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-error *ngIf="newUserForm.get('name')?.invalid">
+        Il nome deve essere di almeno 8 caratteri
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        required
+        [errorStateMatcher]="matcher"
+      />
+      <button mat-icon-button matSuffix type="button">
+        <mat-icon>email</mat-icon>
+      </button>
+      <mat-error *ngIf="newUserForm.get('email')?.invalid">
+        Inserisci un indirizzo email valido
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Genere</mat-label>
+      <mat-select formControlName="gender" required>
+        <mat-option value="Female">Female</mat-option>
+        <mat-option value="Male">Male</mat-option>
+      </mat-select>
+      <button mat-icon-button matSuffix type="button">
+        <mat-icon>transgender</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <button
+    mat-flat-button
+    color="primary"
+    class="login-btn"
+    type="submit"
+    [disabled]="!newUserForm.valid"
+  >
+    Aggiungi Utente
+    <div *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </button>
+</form>
+
+
