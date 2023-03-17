@@ -47,7 +47,11 @@ export class UserComponent implements OnInit {
         this.userService.deleteUser(this.user.id).subscribe({
           next: () => {
             this.updateUser.emit(this.user.id);
-            alert('Utente Eliminato');
+            const dialogRef = this.drawDialog({
+              title: `Utente eliminato`,
+              body:'',
+              isDenialNeeded : false
+            })
           },
           error: (err) => {
             console.error(`Delete user error: ${err.message}`);
