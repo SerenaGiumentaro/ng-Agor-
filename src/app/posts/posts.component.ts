@@ -1,8 +1,9 @@
 import { HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { postsUrl } from '../api.config';
+import { DialogService } from '../dialog.service';
 import { Post } from '../interface';
 import { PostService } from '../services/post.service';
 
@@ -12,7 +13,12 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private dialog: MatDialog,
+    private dialogService: DialogService
+  ) {}
+  @ViewChild('searchInput') searchInput!: ElementRef
   searchForm!: FormGroup;
   hideNewPost: boolean = true;
   havePost: boolean = true;
@@ -72,13 +78,37 @@ export class PostsComponent implements OnInit {
             return;
           }
           this.loading = false;
+          this.havePost = true;
           this.allPosts = res.body;
           this.lenghtPosts = res.headers.get('x-pagination-total');
-          this.searchForm.get('keyword')?.reset()
+          this.searchForm.get('keyword')?.reset();
+          this.searchInput.nativeElement.blur()
         },
         error: (err) => {
-          console.error(`Posts search error: ${err.message}`);
+          this.loading = false
+          switch (err.status) {
+            case 0:
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore del server`,
+                  isDenialNeeded: false,
+                });
+              }
+              break;
+            default: {
+              {
+                this.dialogService.drawDialog(this.dialog, {
+                  title: `Attenzione!`,
+                  body: `Errore sconosciuto`,
+                  isDenialNeeded: false,
+                });
+              }
+            }
+          }
         },
       });
   }
 }
+
+

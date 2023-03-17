@@ -26,3 +26,9 @@ export interface Comment {
   email: string,
   body: string
 }
+
+export interface DialogData {
+  title: string,
+  body: string,
+  isDenialNeeded: boolean
+}

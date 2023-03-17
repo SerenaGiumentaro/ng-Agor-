@@ -18,6 +18,4 @@ export class DialogComponent {
   ) {
     this.data = data;
   }
-
- 
 }

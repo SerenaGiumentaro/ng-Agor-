@@ -1,9 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from 'src/app/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,12 @@ import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 })
 export class LoginComponent implements OnInit {
   hide!: boolean;
-  loading: boolean = false
+  loading: boolean = false;
   constructor(
     private loginService: LoginService,
-    private route: Router
+    private route: Router,
+    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {}
   loginForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true
+    this.loading = true;
 
     // Saving the given token in the local storage we can do search with the get call
     localStorage.setItem('token', this.loginForm.value.token);
@@ -42,28 +46,61 @@ export class LoginComponent implements OnInit {
 
     this.loginService.checkUser(params).subscribe({
       next: (res) => {
-        console.log(res);
         // check if user exists
         if (res.length === 0) {
-          alert(`L'utente non esiste o token non valido`);
+          this.dialogService.drawDialog(this.dialog, {
+            title: 'Attenzione!',
+            body: `L'utente non esiste o token non valido`,
+            isDenialNeeded: false,
+          });
           // clear the local storage from token
           localStorage.clear();
-          this.loading = false
+          this.loading = false;
           return;
         }
         // if user exists save in local storage his is and the token
-        this.loginService.currentUser = [...res]
-        localStorage.setItem('user', JSON.stringify({name: res[0].name, email: res[0].email, gender: res[0].gender, status: res[0].status}))
+        this.loginService.currentUser = [...res];
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            name: res[0].name,
+            email: res[0].email,
+            gender: res[0].gender,
+            status: res[0].status,
+          })
+        );
         localStorage.setItem('user_id', JSON.stringify(res[0].id));
         localStorage.setItem('isLoggedIn', 'true');
         this.route.navigate(['dashboard']);
       },
       error: (err) => {
-        if (err.status === 401) {
-          alert('Autenticazione fallita, usare un token valido');
-        } else {
-          console.log(err);
-          alert(err.message);
+        this.loading = false;
+        switch (err.status) {
+          case 401:
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: 'Errore',
+                body: `Autenticazione fallita usare un token valido`,
+                isDenialNeeded: false,
+              });
+            }
+            break;
+          case 0:
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: 'Errore',
+                body: `Errore del server`,
+                isDenialNeeded: false,
+              });
+            }
+            break;
+          default: {
+            this.dialogService.drawDialog(this.dialog, {
+              title: `Attenzione!`,
+              body: `Errore sconosciuto`,
+              isDenialNeeded: false,
+            });
+          }
         }
       },
     });

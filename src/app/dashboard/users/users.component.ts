@@ -1,7 +1,9 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { DialogService } from 'src/app/dialog.service';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -11,7 +13,11 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private dialog: MatDialog,
+    private dialogService: DialogService
+  ) {}
   @ViewChild('inputKeyword') inputKeyword!: ElementRef;
   haveUser: boolean = true;
   loading: boolean = false;
@@ -56,10 +62,30 @@ export class UsersComponent implements OnInit {
         this.users = res.body;
         this.lenghtUsers = res.headers.get('x-pagination-total');
         this.inputKeyword?.nativeElement.blur();
-        this.searchUserForm.get('keyword')?.reset()
+        this.searchUserForm.get('keyword')?.reset();
       },
       error: (err) => {
-        console.error(`Search user error: ${err.message}`);
+        this.loading = false;
+        switch (err.status) {
+          case 0:
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore del server`,
+                isDenialNeeded: false,
+              });
+            }
+            break;
+          default: {
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore sconosciuto`,
+                isDenialNeeded: false,
+              });
+            }
+          }
+        }
       },
     });
   }
