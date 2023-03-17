@@ -20,8 +20,8 @@ export class AppComponent {
       isDenialNeeded : true
     }
     let dialogRef = this.dialog.open(DialogComponent, dialogConfig)
-    dialogRef.afterClosed().subscribe( value => {
-      if(value){
+    dialogRef.afterClosed().subscribe( res => {
+      if(res){
         this.loginService.logout()
       }
       return
