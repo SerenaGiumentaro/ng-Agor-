@@ -53,8 +53,7 @@ export class LoginComponent implements OnInit {
         }
         // if user exists save in local storage his is and the token
         this.loginService.currentUser = [...res]
-        console.log(this.loginService.currentUser)
-        localStorage.setItem('user', JSON.stringify({name: res[0].name, email: res[0].email}))
+        localStorage.setItem('user', JSON.stringify({name: res[0].name, email: res[0].email, gender: res[0].gender, status: res[0].status}))
         localStorage.setItem('user_id', JSON.stringify(res[0].id));
         localStorage.setItem('isLoggedIn', 'true');
         this.route.navigate(['dashboard']);

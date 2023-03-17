@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private route: Router){}
+  constructor(private loginService: LoginService, private dialog: MatDialog){}
   title = `Agorà`;
+
   logout(){
-    localStorage.clear()
-    this.route.navigate(['login'])
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.data = {
+      title: 'Logout',
+      body: `Vuoi uscire dall'applicazione?`,
+      isDenialNeeded : true
+    }
+    let dialogRef = this.dialog.open(DialogComponent, dialogConfig)
+    dialogRef.afterClosed().subscribe( value => {
+      if(value){
+        this.loginService.logout()
+      }
+      return
+    })
 
   }
 }
