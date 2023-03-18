@@ -52,6 +52,9 @@
     type="submit"
     [disabled]="!newUserForm.valid"
   >
+  <mat-icon>
+    person_add
+  </mat-icon>
     Aggiungi Utente
     <div *ngIf="loading">
       <mat-spinner></mat-spinner>
