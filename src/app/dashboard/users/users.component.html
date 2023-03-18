@@ -28,7 +28,7 @@
     <app-new-user></app-new-user>
   </mat-expansion-panel>
 </mat-accordion>
-<div *ngIf="haveUser" class="flex-center column">
+<div *ngIf="haveUser" class="users-container">
   <mat-paginator
     [pageSizeOptions]="pageSizeOptions"
     [pageIndex]="pageIndex"
