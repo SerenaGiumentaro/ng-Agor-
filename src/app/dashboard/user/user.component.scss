@@ -19,12 +19,14 @@
   display: flex;
   padding: 1rem;
   margin: 1.5rem 0;
+  flex-wrap: wrap;
   cursor: default;
   position: relative;
 
 }
 .user-data{
   margin: 0 1.5rem;
+  overflow-wrap: anywhere;
 }
 .delete{
   position: absolute;
