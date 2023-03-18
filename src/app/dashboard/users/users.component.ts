@@ -100,7 +100,29 @@ export class UsersComponent implements OnInit {
         this.loading = false;
         this.users = res.body;
         this.lenghtUsers = res.headers.get('x-pagination-total');
-      },
+      },error: err => {
+        this.loading = false
+        switch (err.status) {
+          case 0:
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore del server`,
+                isDenialNeeded: false,
+              });
+            }
+            break;
+          default: {
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore sconosciuto`,
+                isDenialNeeded: false,
+              });
+            }
+          }
+        }
+      }
     });
   }
 }
