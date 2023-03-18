@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NewPostComponent } from './new-post/new-post.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonToggleModule,
     MatSnackBarModule,
+    MatExpansionModule,
   ],
   exports: [
     PostComponent,

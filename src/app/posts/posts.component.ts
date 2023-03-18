@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
     private dialog: MatDialog,
     private dialogService: DialogService
   ) {}
-  @ViewChild('searchInput') searchInput!: ElementRef
+  @ViewChild('searchInput') searchInput!: ElementRef;
   searchForm!: FormGroup;
   hideNewPost: boolean = true;
   havePost: boolean = true;
@@ -53,6 +53,29 @@ export class PostsComponent implements OnInit {
         this.lenghtPosts = res.headers.get('x-pagination-total');
         this.loading = false;
       },
+      error: (err) => {
+        this.loading = false;
+        switch (err.status) {
+          case 0:
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore del server`,
+                isDenialNeeded: false,
+              });
+            }
+            break;
+          default: {
+            {
+              this.dialogService.drawDialog(this.dialog, {
+                title: `Attenzione!`,
+                body: `Errore sconosciuto`,
+                isDenialNeeded: false,
+              });
+            }
+          }
+        }
+      },
     });
   }
   handlePageEvent(e: PageEvent) {
@@ -82,10 +105,10 @@ export class PostsComponent implements OnInit {
           this.allPosts = res.body;
           this.lenghtPosts = res.headers.get('x-pagination-total');
           this.searchForm.get('keyword')?.reset();
-          this.searchInput.nativeElement.blur()
+          this.searchInput.nativeElement.blur();
         },
         error: (err) => {
-          this.loading = false
+          this.loading = false;
           switch (err.status) {
             case 0:
               {
@@ -110,5 +133,3 @@ export class PostsComponent implements OnInit {
       });
   }
 }
-
-

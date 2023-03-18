@@ -20,6 +20,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PostsModule } from '../posts/posts.module';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { PostsModule } from '../posts/posts.module';
     MatSelectModule,
     MatTooltipModule,
     PostsModule,
+    MatExpansionModule,
   ]
 })
 export class DashboardModule { }

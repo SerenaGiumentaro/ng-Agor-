@@ -2,7 +2,7 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Search...</mat-label>
-      <input matInput formControlName="keyword" type="text" #searchInput/>
+      <input matInput formControlName="keyword" type="text" #searchInput />
       <button mat-icon-button matSuffix type="submit">
         <mat-icon>search</mat-icon>
       </button>
@@ -16,9 +16,17 @@
     </mat-button-toggle-group>
   </div>
 </form>
-<div class="new-post">
-    <app-new-post></app-new-post>
-</div>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Aggiungi Post </mat-panel-title>
+      <mat-icon color="accent">post_add</mat-icon>
+    </mat-expansion-panel-header>
+    <div class="new-post">
+      <app-new-post></app-new-post>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>
