@@ -5,12 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { DialogService } from 'src/app/dialog.service';
 import { User } from 'src/app/interface';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 @Component({
   selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  templateUrl: '../ex-users-list/users.-list.component.html',
+  styleUrls: ['../ex-users-list/users.-list.component.html'],
 })
 export class UsersComponent implements OnInit {
   constructor(

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'src/app/dialog.service';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { User } from 'src/app/interface';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 @Component({
   selector: 'app-user',

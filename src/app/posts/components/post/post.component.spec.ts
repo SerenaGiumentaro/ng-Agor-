@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
-import { PostService } from 'src/app/services/post.service';
-import { UsersService } from 'src/app/services/users.service';
+import { PostService } from 'src/app/posts/services/post.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 import { PostComponent } from './post.component';
 

@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   ) {}
   loading: boolean = false;
   registerForm!: FormGroup;
-  hide!: boolean;
+  hide: boolean = true
   selectedGender!: string;
   matcher = new MyErrorStateMatcher();
   ngOnInit(): void {

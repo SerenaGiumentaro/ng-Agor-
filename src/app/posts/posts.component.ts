@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { DialogService } from '../dialog.service';
 import { Post } from '../interface';
-import { PostService } from '../services/post.service';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-posts',

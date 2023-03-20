@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { postsUrl, usersUlr } from '../api.config';
-import { Post } from '../interface';
+import { postsUrl, usersUlr } from '../../api.config';
+import { Post } from '../../interface';
 
 @Injectable({
   providedIn: 'root',

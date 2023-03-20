@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
 import { Comment, Post, User } from 'src/app/interface';
-import { CommentsService } from 'src/app/services/comments.service';
-import { UsersService } from 'src/app/services/users.service';
+import { CommentsService } from 'src/app/posts/services/comments.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 @Component({
   selector: 'app-post',

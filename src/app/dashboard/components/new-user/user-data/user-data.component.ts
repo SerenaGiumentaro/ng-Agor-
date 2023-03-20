@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
 import { Post, User } from 'src/app/interface';
-import { PostService } from 'src/app/services/post.service';
-import { UsersService } from 'src/app/services/users.service';
+import { PostService } from 'src/app/posts/services/post.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 @Component({
   selector: 'app-user-data',

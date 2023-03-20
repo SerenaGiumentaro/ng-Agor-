@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
 import { UserBody } from 'src/app/interface';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 
 @Component({
   selector: 'app-new-user',

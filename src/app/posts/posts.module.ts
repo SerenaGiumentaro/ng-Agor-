@@ -3,19 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { PostsRoutingModule } from './posts-routing.module';
 import { PostsComponent } from './posts.component';
-import { PostComponent } from './post/post.component';
+import { PostComponent } from './components/post/post.component';
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { CommentComponent } from './comment/comment.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { NewPostComponent } from './new-post/new-post.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 

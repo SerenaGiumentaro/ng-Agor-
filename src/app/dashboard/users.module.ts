@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
-import { UsersComponent } from './users/users.component';
-import { UserComponent } from './user/user.component';
+import { UsersRoutingModule } from './users-routing.module';
+import { UsersComponent } from './users.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { UserComponent } from './components/user/user.component';
 // Material
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -14,8 +14,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { UserDataComponent } from './user-data/user-data.component';
-import { NewUserComponent } from './new-user/new-user.component';
+import { UserDataComponent } from './components/new-user/user-data/user-data.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -25,15 +25,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     UsersComponent,
     UserComponent,
     UserDataComponent,
-    NewUserComponent
+    NewUserComponent,
+    UsersListComponent,
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    UsersRoutingModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
@@ -50,4 +50,4 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatExpansionModule,
   ]
 })
-export class DashboardModule { }
+export class UsersModule { }

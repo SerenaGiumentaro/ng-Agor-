@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
-import { PostService } from 'src/app/services/post.service';
+import { PostService } from 'src/app/posts/services/post.service';
 
 @Component({
   selector: 'app-new-post',

@@ -7,9 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import { AuthInterceptor } from './auth.interceptor';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
-// import { PostComponent } from './components/post/post.component';
 
 // Angular Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -25,7 +24,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PostsModule } from './posts/posts.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { UsersModule } from './dashboard/users.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
@@ -57,7 +56,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatCardModule,
     MatExpansionModule,
     PostsModule,
-    DashboardModule,
+    UsersModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatDialogModule,

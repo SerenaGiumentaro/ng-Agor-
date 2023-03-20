@@ -1,20 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpTestingController , HttpClientTestingModule} from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';HttpClient
 import { UsersComponent } from './users.component';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { UsersRoutingModule } from './users-routing.module';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
   let httpClient: HttpClient
-  let httpTestingController: HttpTestingController
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsersComponent ],
-      imports: [
+      declarations: [ UsersComponent, UsersComponent ],
+      imports:[
         HttpClientTestingModule,
+        UsersRoutingModule,
       ]
     })
     .compileComponents();
@@ -22,7 +21,6 @@ describe('UsersComponent', () => {
     fixture = TestBed.createComponent(UsersComponent);
     component = fixture.componentInstance;
     httpClient = TestBed.inject(HttpClient)
-    httpTestingController = TestBed.inject(HttpTestingController)
     fixture.detectChanges();
   });
 

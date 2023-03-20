@@ -13,7 +13,7 @@ import { DialogService } from 'src/app/dialog.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  hide!: boolean;
+  hide: boolean = true
   loading: boolean = false;
   constructor(
     private loginService: LoginService,

@@ -2,8 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
 import { Post, User } from 'src/app/interface';
-import { PostService } from 'src/app/services/post.service';
-import { UsersService } from 'src/app/services/users.service';
+import { PostService } from 'src/app/posts/services/post.service';
 
 @Component({
   selector: 'app-personal-profile',
@@ -12,7 +11,6 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class PersonalProfileComponent implements OnInit, AfterViewInit {
   constructor(
-    private userService: UsersService,
     private postService: PostService,
     private dialogService: DialogService,
     private dialog: MatDialog
@@ -33,12 +31,6 @@ export class PersonalProfileComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const id: any = localStorage.getItem('user_id');
-    // this.userService.getUser(id).subscribe({
-    //   next: (res) => {
-    //     this.loading = false
-    //     this.user = res;
-    //   },
-    // });
     const currentUser: any = localStorage.getItem('user');
     this.user = JSON.parse(currentUser);
     this.postService.getUserPosts(id).subscribe({
