@@ -1,11 +1,11 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/dialog.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         );
         localStorage.setItem('user_id', JSON.stringify(res[0].id));
         localStorage.setItem('isLoggedIn', 'true');
-        this.route.navigate(['dashboard']);
+        this.route.navigate(['users']);
       },
       error: (err) => {
         this.loading = false;

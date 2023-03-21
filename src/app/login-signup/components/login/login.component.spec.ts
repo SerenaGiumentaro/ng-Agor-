@@ -12,9 +12,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/login-signup/services/login.service';
 import { provideRouter, Router } from '@angular/router';
-import { DashboardComponent } from 'src/app/dashboard/users.component';
+import { UsersComponent } from 'src/app/dashboard/users.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -38,7 +38,7 @@ describe('LoginComponent', () => {
       ],
       providers: [
         ErrorStateMatcher,
-        provideRouter([{ path: 'dashboard', component: DashboardComponent }]),
+        provideRouter([{ path: 'users', component: UsersComponent }]),
       ],
     }).compileComponents();
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../../interface';
+import { User } from '../../../interface';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { MatDialog } from '@angular/material/dialog';
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
             body: '',
             isDenialNeeded: false,
           });
-          this.route.navigate(['login']);
+          this.route.navigate(['login-signup']);
         },
         error: (err) => {
           this.loading = false;

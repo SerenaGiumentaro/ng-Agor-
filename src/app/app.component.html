@@ -1,21 +1,2 @@
-
-<mat-toolbar color="primary">
-    <a routerLink="" matTooltip="Agorà">
-      <img src="../assets/logo.png" alt="agorà logo" class="logo">
-    </a>
-  <button mat-icon-button routerLink="users" matTooltip="Utenti">
-    <mat-icon>group</mat-icon>
-  </button>
-  <button mat-icon-button routerLink="posts" matTooltip="Post">
-    <mat-icon>newspaper</mat-icon>
-  </button>
-  <button mat-icon-button class="profile" routerLink="profile" matTooltip="Profilo">
-    <mat-icon>person</mat-icon>
-  </button>
-  <button mat-icon-button (click)="logout()" matTooltip="Logout">
-    <mat-icon>logout</mat-icon>
-  </button>
-</mat-toolbar>
-
+<app-nav-bar></app-nav-bar>
 <router-outlet></router-outlet>
-

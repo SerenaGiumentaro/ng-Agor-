@@ -2,7 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from '../interface';
+import { usersUlr } from 'src/app/api.config';
+import { User } from '../../interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class LoginService {
   }
   checkUser(params: HttpParams): Observable<User[]> {
     return this.http
-      .get<User[]>('https://gorest.co.in/public/v2/users?', {
+      .get<User[]>(`${usersUlr}?`, {
         params,
       })
       .pipe(
@@ -28,6 +29,6 @@ export class LoginService {
 
   logout() {
     localStorage.clear();
-    this.route.navigate(['login']);
+    this.route.navigate(['login-signup']);
   }
 }

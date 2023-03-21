@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpTestingController , HttpClientTestingModule} from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersComponent } from './users-list.component';
+import { UsersComponent } from '../../users.component';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
