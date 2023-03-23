@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="isLoggedIn | async">
     <a routerLink="" matTooltip="Agorà">
       <img src="../assets/logo.png" alt="agorà logo" class="logo">
     </a>
