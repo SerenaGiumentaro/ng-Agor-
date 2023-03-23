@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { Comment, Post, User } from 'src/app/interface';
 import { CommentsService } from 'src/app/posts/services/comments.service';
 import { UsersService } from 'src/app/dashboard/services/users.service';

@@ -10,9 +10,9 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-flat-button (click)="hide = !hide" color="accent">
+      <button mat-flat-button (click)="hide = !hide" color="primary" class="show-comment">
         {{ hide ? "Mostra Commenti" : "Nascondi Commenti" }}
-        <mat-icon>comment</mat-icon>
+        <mat-icon color="accent">comment</mat-icon>
       </button>
     </mat-card-actions>
     <div *ngIf="!hide">

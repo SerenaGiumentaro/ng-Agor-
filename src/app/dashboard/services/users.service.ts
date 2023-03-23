@@ -15,7 +15,7 @@ export class UsersService {
   }
   getUser(id: number): Observable<User> {
     return this.http
-      .get<User>(`https://gorest.co.in/public/v2/users/${id}`)
+      .get<User>(`${usersUlr}/${id}`)
       .pipe(
         catchError((err) => {
           return throwError(() => err);
@@ -26,7 +26,7 @@ export class UsersService {
   getAllUsers(page: number, perPage: number): Observable<HttpResponse<User[]>> {
     return this.http
       .get<User[]>(
-        `https://gorest.co.in/public/v2/users?page=${page}&per_page=${perPage}`,
+        `${usersUlr}?page=${page}&per_page=${perPage}`,
         { observe: 'response' }
       )
       .pipe(

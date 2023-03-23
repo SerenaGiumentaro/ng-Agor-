@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { LoginService } from '../../services/login.service';
 
 @Component({

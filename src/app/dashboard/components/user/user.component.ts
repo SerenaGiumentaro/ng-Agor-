@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { DialogService } from 'src/app/dialog.service';
-import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/dashboard/services/users.service';
 

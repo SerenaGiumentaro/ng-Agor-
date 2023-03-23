@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
 
 // Angular Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -25,15 +24,15 @@ import { PostsModule } from './posts/posts.module';
 import { UsersModule } from './dashboard/users.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SharedModule } from './shared/shared.module';
+import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PersonalProfileComponent,
-    DialogComponent,
     NavBarComponent,
+    PersonalProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,15 +54,15 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     MatExpansionModule,
     PostsModule,
     UsersModule,
+    SharedModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatDialogModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
 })
 export class AppModule {}

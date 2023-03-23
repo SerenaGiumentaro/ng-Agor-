@@ -21,6 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { PostsModule } from '../posts/posts.module';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     UserDataComponent,
     NewUserComponent,
     UsersListComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +51,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTooltipModule,
     PostsModule,
     MatExpansionModule,
+    MatDialogModule,
+  ],
+  exports: [
+    UserCardComponent
   ]
 })
 export class UsersModule { }

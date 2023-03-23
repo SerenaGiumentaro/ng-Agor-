@@ -5,11 +5,7 @@ import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
-  {
-    path: 'profile',
-    canActivate: [AuthGuard],
-    component: PersonalProfileComponent,
-  },
+
   {
     path: 'users',
     canActivate: [AuthGuard],
@@ -29,6 +25,7 @@ const routes: Routes = [
         (m) => m.LoginSignupModule
       ),
   },
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
 ];
 
 @NgModule({

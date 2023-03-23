@@ -19,15 +19,10 @@
 <div *ngIf="!haveUser">
   <p>Nessun risultato trovato, provare con un altra ricerca.</p>
 </div>
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> Aggiungi Utente </mat-panel-title>
-        <mat-icon color="accent">account_circle</mat-icon>
-    </mat-expansion-panel-header>
-    <app-new-user></app-new-user>
-  </mat-expansion-panel>
-</mat-accordion>
+<button mat-flat-button color="primary" (click)="openDialog()">
+  Aggiungi Utente
+  <mat-icon color="accent">account_circle</mat-icon>
+</button>
 <div *ngIf="haveUser" class="users-container">
   <div *ngFor="let user of users" class="users">
     <app-user

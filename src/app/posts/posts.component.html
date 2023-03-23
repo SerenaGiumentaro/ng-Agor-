@@ -16,31 +16,14 @@
     </mat-button-toggle-group>
   </div>
 </form>
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> Aggiungi Post </mat-panel-title>
-      <mat-icon color="accent">post_add</mat-icon>
-    </mat-expansion-panel-header>
-    <div class="new-post">
-      <app-new-post></app-new-post>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+<button mat-flat-button color="primary" (click)="openDialog()">
+  Aggiungi Post
+  <mat-icon color="accent">post_add</mat-icon>
+</button>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!loading && havePost">
-
-  <mat-paginator
-    [pageSizeOptions]="pageSizeOptions"
-    [pageIndex]="pageIndex"
-    [pageSize]="pageSize"
-    aria-label="Select page"
-    (page)="handlePageEvent($event)"
-    [length]="lenghtPosts"
-  >
-  </mat-paginator>
   <div *ngFor="let post of allPosts">
     <app-post [post]="post"></app-post>
   </div>

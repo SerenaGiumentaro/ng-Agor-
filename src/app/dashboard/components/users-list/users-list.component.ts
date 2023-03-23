@@ -1,11 +1,12 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { DialogService } from 'src/app/dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { User } from 'src/app/interface';
 import { UsersService } from 'src/app/dashboard/services/users.service';
+import { NewUserComponent } from '../new-user/new-user.component';
 
 @Component({
   selector: 'app-users-list',
@@ -16,9 +17,12 @@ export class UsersListComponent implements OnInit{
     constructor(
       private userService: UsersService,
       private dialog: MatDialog,
+      private dialogNewUser: MatDialog,
       private dialogService: DialogService
     ) {}
     @ViewChild('inputKeyword') inputKeyword!: ElementRef;
+    // se serve configurare il dialog
+    dialogConfigNewUser = new MatDialogConfig()
     haveUser: boolean = true;
     loading: boolean = false;
     searchUserForm!: FormGroup;
@@ -124,6 +128,10 @@ export class UsersListComponent implements OnInit{
           }
         }
       });
+    }
+
+    openDialog(){
+      this.dialogNewUser.open(NewUserComponent, this.dialogConfigNewUser)
     }
   }
 

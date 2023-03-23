@@ -15,17 +15,13 @@ mat-form-field {
 .users {
   width: 100vw;
 }
-mat-expansion-panel-header mat-icon {
-  margin: 0 5px;
-}
-mat-expansion-panel {
-  background: rgba(22, 139, 42, 0.2);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(108, 255, 133, 0.3);
-}
 .users-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+mat-paginator{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }

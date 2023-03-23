@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { PostService } from 'src/app/posts/services/post.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class NewPostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private dialog: MatDialog,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialogRef: MatDialogRef<NewPostComponent>
   ) {}
   loading: boolean = false;
   newPost!: FormGroup;
@@ -41,6 +42,7 @@ export class NewPostComponent implements OnInit {
           Object.keys(this.newPost.controls).forEach((key) => {
             this.newPost.get(key)?.setErrors(null);
           });
+          this.dialogRef.close()
         },
         error: (err) => {
           this.loading = false;

@@ -5,7 +5,8 @@ import { User } from '../../../interface';
 import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { usersUlr } from 'src/app/api.config';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ) {}
   loading: boolean = false;
   registerForm!: FormGroup;
-  hide: boolean = true
+  hide: boolean = true;
   selectedGender!: string;
   matcher = new MyErrorStateMatcher();
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
     this.http
       .post<User>(
-        'https://gorest.co.in/public/v2/users',
+        `${usersUlr}`,
         {
           name: this.registerForm.value.name,
           email: this.registerForm.value.email,

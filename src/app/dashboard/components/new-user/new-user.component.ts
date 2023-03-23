@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from 'src/app/dialog.service';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { UserBody } from 'src/app/interface';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { UsersService } from 'src/app/dashboard/services/users.service';
@@ -15,7 +15,8 @@ export class NewUserComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private dialogService: DialogService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<NewUserComponent>
   ) {}
   loading: boolean = false;
   newUserForm!: FormGroup;
@@ -48,15 +49,17 @@ export class NewUserComponent implements OnInit {
           body: '',
           isDenialNeeded: false,
         });
+        this.dialogRef.close()
       },
       error: (err) => {
         this.loading = false;
+        console.log(err)
         switch (err.status) {
           case 422:
             {
               this.dialogService.drawDialog(this.dialog, {
                 title: `Attenzione!`,
-                body: `Dati mancanti`,
+                body: `Dati mancanti o l'utente esiste già`,
                 isDenialNeeded: false,
               });
             }

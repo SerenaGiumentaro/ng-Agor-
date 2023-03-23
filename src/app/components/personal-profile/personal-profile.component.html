@@ -1,20 +1,11 @@
-<div *ngIf="!loading">
-  <div class="profile flex-center column">
-    <mat-icon
-      class="flex-center status"
-      id="icon"
-      [ngClass]="{
-        active: user.status === 'active',
-        inactive: user.status === 'inactive'
-      }"
-      >{{ user.gender === "female" ? "face_3" : "face" }}</mat-icon
-    >
-    <h1>{{ user.name }}</h1>
-    <h3>{{ user.email }}</h3>
-  </div>
+<app-user-card [user]="user"></app-user-card>
+<div *ngIf="havePost">
   <div *ngFor="let post of allUserPosts">
     <app-post [post]="post"></app-post>
   </div>
+</div>
+<div *ngIf="!havePost && !loading" class="flex-center">
+  <p>Non si sono post ancora</p>
 </div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
