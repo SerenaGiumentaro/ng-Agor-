@@ -1,25 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
 import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
-import { RegisterComponent } from './components/register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
+
   {
-    path: 'profile',
-    canActivate: [AuthGuard],
-    component: PersonalProfileComponent,
-  },
-  {
-    path: 'dashboard',
+    path: 'users',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      import('./dashboard/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'posts',
@@ -27,6 +18,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./posts/posts.module').then((m) => m.PostsModule),
   },
+  {
+    path: 'login-signup',
+    loadChildren: () =>
+      import('./login-signup/login-signup.module').then(
+        (m) => m.LoginSignupModule
+      ),
+  },
+  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
 ];
 
 @NgModule({

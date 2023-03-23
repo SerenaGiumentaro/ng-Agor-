@@ -1,0 +1,27 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  min-width: 250px;
+  width: 30%;
+}
+mat-form-field {
+  width: 100%;
+}
+.type-search {
+  display: flex;
+  justify-content: space-between;
+}
+.users {
+  width: 100vw;
+}
+.users-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+mat-paginator{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}

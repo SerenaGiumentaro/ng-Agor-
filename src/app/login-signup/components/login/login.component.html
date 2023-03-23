@@ -1,0 +1,59 @@
+<form [formGroup]="loginForm" class="flex-center" (ngSubmit)="onSubmit()" *ngIf="!loading">
+  <h3>Login</h3>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        formControlName="email"
+        type="email"
+        required
+        [errorStateMatcher]="matcher"
+      />
+      <button mat-icon-button matSuffix type="button">
+        <mat-icon>email</mat-icon>
+      </button>
+      <mat-error *ngIf="loginForm.get('email')?.invalid">
+        Inserisci un indirizzo email valido
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Token</mat-label>
+      <input
+        required
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="token"
+        maxlength="64"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="loginForm.get('token')?.invalid">
+        Il token deve contenere 64 caratteri
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <p>Sei un nuovo utente? <a routerLink="register">Registrati</a></p>
+  <button
+    mat-flat-button
+    color="primary"
+    class="login-btn"
+    type="submit"
+    [disabled]="!loginForm.valid"
+  >
+    Login
+  </button>
+</form>
+<div *ngIf="loading" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>

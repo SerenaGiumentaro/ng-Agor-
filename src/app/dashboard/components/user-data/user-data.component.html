@@ -1,0 +1,15 @@
+<button mat-mini-fab routerLink="/users" class="back">
+  <mat-icon>arrow_back</mat-icon>
+</button>
+<app-user-card [user]="user"></app-user-card>
+<div *ngIf="havePost">
+  <div *ngFor="let post of allPosts">
+    <app-post [post]="post"></app-post>
+  </div>
+</div>
+<div *ngIf="!havePost && !loading" class="flex-center">
+  <p>Non si sono post ancora</p>
+</div>
+<div *ngIf="loading" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>

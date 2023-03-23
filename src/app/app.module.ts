@@ -6,10 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
-import { AuthInterceptor } from './auth.interceptor';
-import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
-// import { PostComponent } from './components/post/post.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 // Angular Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -18,25 +15,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { RegisterComponent } from './components/register/register.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PostsModule } from './posts/posts.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { UsersModule } from './dashboard/users.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SharedModule } from './shared/shared.module';
+import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
+    NavBarComponent,
     PersonalProfileComponent,
-    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,16 +53,16 @@ import { DialogComponent } from './dialog/dialog.component';
     MatCardModule,
     MatExpansionModule,
     PostsModule,
-    DashboardModule,
+    UsersModule,
+    SharedModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatDialogModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
 })
 export class AppModule {}

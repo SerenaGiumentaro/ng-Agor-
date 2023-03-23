@@ -7,8 +7,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { User } from 'src/app/interface';
-import { PostService } from 'src/app/services/post.service';
-import { UsersService } from 'src/app/services/users.service';
+import { PostService } from 'src/app/posts/services/post.service';
+import { UsersService } from 'src/app/dashboard/services/users.service';
 import { PersonalProfileComponent } from './personal-profile.component';
 import { MatCardModule } from '@angular/material/card';
 

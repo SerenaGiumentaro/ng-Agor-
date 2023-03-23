@@ -1,11 +1,12 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
-import { DialogService } from '../dialog.service';
+import { DialogService } from '../shared/services/dialog.service';
 import { Post } from '../interface';
-import { PostService } from '../services/post.service';
+import { PostService } from './services/post.service';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 @Component({
   selector: 'app-posts',
@@ -16,9 +17,11 @@ export class PostsComponent implements OnInit {
   constructor(
     private postService: PostService,
     private dialog: MatDialog,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private dialogNewPost: MatDialog,
   ) {}
   @ViewChild('searchInput') searchInput!: ElementRef;
+  dialogNewPostConfig = new MatDialogConfig
   searchForm!: FormGroup;
   hideNewPost: boolean = true;
   havePost: boolean = true;
@@ -131,5 +134,9 @@ export class PostsComponent implements OnInit {
           }
         },
       });
+  }
+
+  openDialog(){
+    this.dialogNewPost.open(NewPostComponent, this.dialogNewPostConfig)
   }
 }
