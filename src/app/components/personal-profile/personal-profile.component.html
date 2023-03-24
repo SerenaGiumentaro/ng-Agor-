@@ -4,8 +4,8 @@
     <app-post [post]="post"></app-post>
   </div>
 </div>
-<div *ngIf="!havePost && !loading" class="flex-center">
-  <p>Non ci sono post ancora</p>
+<div *ngIf="!havePost && !loading" class="flex-center message">
+  <p class="message">Non ci sono post ancora</p>
 </div>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
