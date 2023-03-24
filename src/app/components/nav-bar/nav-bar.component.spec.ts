@@ -5,12 +5,17 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { By } from '@angular/platform-browser';
 import { provideRouter, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { LoginService } from 'src/app/login-signup/services/login.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { DialogService } from 'src/app/shared/services/dialog.service';
@@ -26,11 +31,11 @@ describe('NavBarComponent', () => {
   let httpTestingController: HttpTestingController;
   let dialogService: DialogService;
   let loginService: LoginService;
-  let mockDialog: jasmine.SpyObj<MatDialog>
-  let drawDialogSpy : jasmine.Spy
+  let mockDialog: jasmine.SpyObj<MatDialog>;
+  let drawDialogSpy: jasmine.Spy;
   beforeEach(async () => {
-    mockDialog = jasmine.createSpyObj(['open']);
-    drawDialogSpy = spyOn(DialogService.prototype, 'drawDialog')
+    mockDialog = jasmine.createSpyObj(['open', 'afterClosed']);
+    drawDialogSpy = spyOn(DialogService.prototype, 'drawDialog');
     await TestBed.configureTestingModule({
       declarations: [NavBarComponent],
       imports: [
@@ -44,6 +49,7 @@ describe('NavBarComponent', () => {
         DialogService,
         LoginService,
         { provide: MatDialog, useValue: mockDialog },
+        { provide: MatDialogRef, useValue: {afterClosed : () => of(true)} },
         provideRouter([
           {
             path: 'posts',
@@ -63,7 +69,7 @@ describe('NavBarComponent', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
     dialogService = TestBed.inject(DialogService);
     loginService = TestBed.inject(LoginService);
-    navigateSpy.calls.reset;
+    navigateSpy.calls.reset();
     fixture.detectChanges();
   });
 
@@ -108,19 +114,27 @@ describe('NavBarComponent', () => {
       spyOn(component, 'logout');
       button.triggerEventHandler('click', null);
     });
+    const mockDialogConfig = {
+      title: 'Logout',
+      body: `Vuoi uscire dall'appliocazione?`,
+      isDenialNeeded: true,
+    };
     it(`should call the logout when clicked`, () => {
       expect(component.logout).toHaveBeenCalled();
     });
 
     it(`should open dialog calling dialog service`, () => {
-      const mockDialogConfig = {
-        title: 'Logout',
-        body: `Vuoi uscire dall'appliocazione?`,
-        isDenialNeeded: true,
-      };
-      component.logout();
-
-
+      dialogService.drawDialog(mockDialog, mockDialogConfig)
+      expect(drawDialogSpy).toHaveBeenCalled()
     });
+
+    it(`should call the logout function after press ok`, async()=> {
+      const dialogRef: MatDialogRef<DialogComponent> = TestBed.inject(MatDialogRef)
+      spyOn(dialogRef, 'afterClosed').and.returnValue(of(true))
+      component.logout()
+      spyOn(loginService, 'logout')
+      await fixture.whenStable()
+      expect(loginService.logout).toHaveBeenCalled()
+    })
   });
 });

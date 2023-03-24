@@ -18,6 +18,6 @@ export class UserCardComponent implements OnInit{
   allUserPosts: Post[] = [];
 
   ngOnInit(): void {
-    
+
   }
 }

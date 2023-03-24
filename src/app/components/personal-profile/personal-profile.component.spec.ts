@@ -11,6 +11,10 @@ import { PostService } from 'src/app/posts/services/post.service';
 import { UsersService } from 'src/app/dashboard/services/users.service';
 import { PersonalProfileComponent } from './personal-profile.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UserCardComponent } from 'src/app/dashboard/components/user-card/user-card.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 describe('PersonalProfileComponent', () => {
   let component: PersonalProfileComponent;
@@ -18,16 +22,20 @@ describe('PersonalProfileComponent', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let userService: UsersService;
+  let dialogService: DialogService
+  let mockDialog: jasmine.SpyObj<MatDialog>
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PersonalProfileComponent],
-      imports: [HttpClientTestingModule, MatCardModule],
-      providers: [UsersService, PostService],
+      declarations: [PersonalProfileComponent, UserCardComponent],
+      imports: [HttpClientTestingModule, MatCardModule, MatDialogModule, MatProgressSpinnerModule],
+      providers: [UsersService, PostService,
+      {provide: MatDialog, useValue: mockDialog}],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PersonalProfileComponent);
     component = fixture.componentInstance;
     httpClient = TestBed.inject(HttpClient);
+    dialogService = TestBed.inject(DialogService)
     httpTestingController = TestBed.inject(HttpTestingController);
     userService = TestBed.inject(UsersService);
     fixture.detectChanges();

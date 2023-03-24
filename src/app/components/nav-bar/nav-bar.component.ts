@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/login-signup/services/login.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
@@ -9,17 +8,13 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent implements OnInit{
+export class NavBarComponent {
   constructor(
     private loginService: LoginService,
     private dialog: MatDialog,
     private dialogService: DialogService
   ) {}
-  ngOnInit(): void {
-    this.isLoggedIn = this.loginService.isLoggedIn()
-    console.log(this.isLoggedIn)
-  }
-  isLoggedIn!: Observable<boolean>
+
   title = `Agorà`;
 
   logout() {

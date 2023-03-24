@@ -1,4 +1,5 @@
 import { Component , OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { LoginService } from './login-signup/services/login.service';
 
 @Component({
@@ -6,7 +7,15 @@ import { LoginService } from './login-signup/services/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
+  constructor(private loginService: LoginService){}
+  // isLoggedIn!: boolean
+    isLoggedIn: Observable<boolean> = of(true)
+
+ngOnInit(): void {
+  this.isLoggedIn = this.loginService.isLoggedIn()
+  console.log(this.isLoggedIn)
+}
 
 
 
