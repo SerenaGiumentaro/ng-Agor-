@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -23,6 +24,7 @@ describe('RegisterComponent', () => {
   let httpTestingController: HttpTestingController;
   let router: Router;
   let navigateSpy: jasmine.Spy;
+  let mockDialog: jasmine.SpyObj<MatDialog>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
@@ -38,6 +40,7 @@ describe('RegisterComponent', () => {
       ],
       providers: [
         MyErrorStateMatcher,
+        { provide: MatDialog, useValue: mockDialog },
         provideRouter([{ path: 'login', component: LoginComponent }]),
       ],
     }).compileComponents();
