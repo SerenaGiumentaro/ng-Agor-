@@ -12,12 +12,14 @@ export class LoginService {
   constructor(private http: HttpClient, private route: Router) {}
   currentUser!: User[];
   isLogged = new BehaviorSubject<boolean>(false)
+  // isLogged!: boolean
   getCurrentUser() {
     return this.currentUser;
   }
 
   isLoggedIn(){
     return this.isLogged.asObservable()
+    // return this.isLogged
   }
   checkUser(params: HttpParams): Observable<User[]> {
     return this.http
@@ -33,12 +35,14 @@ export class LoginService {
 
   logout() {
     this.isLogged.next(false)
+    // this.isLogged = false
     localStorage.clear();
     this.route.navigate(['login-signup']);
   }
 
   login(){
     this.isLogged.next(true)
+    // this.isLogged = true
     this.route.navigate(['users'])
   }
 }
