@@ -1,5 +1,10 @@
 <app-nav-bar></app-nav-bar>
-<button mat-flat-button color="primary" (click)="openDialog()" class="add-post-btn">
+<button
+  mat-flat-button
+  color="primary"
+  (click)="openDialog()"
+  class="add-post-btn"
+>
   Aggiungi Post
   <mat-icon color="accent">post_add</mat-icon>
 </button>
@@ -21,6 +26,7 @@
     </mat-button-toggle-group>
   </div>
 </form>
+
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>

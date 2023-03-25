@@ -20,7 +20,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from '../shared/shared.module';
-
 @NgModule({
   declarations: [
     PostsComponent,
