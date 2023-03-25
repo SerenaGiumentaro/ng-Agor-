@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PersonalProfileComponent } from '../components/personal-profile/personal-profile.component';
+import { PersonalProfileComponent } from '../dashboard/components/personal-profile/personal-profile.component';
 import { SharedComponent } from './shared.component';
 
 const routes: Routes = [

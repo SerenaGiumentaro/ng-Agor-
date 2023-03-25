@@ -10,11 +10,10 @@ import { LoginService } from './login-signup/services/login.service';
 export class AppComponent implements OnInit{
   constructor(private loginService: LoginService){}
   // isLoggedIn!: boolean
-    isLoggedIn: Observable<boolean> = of(true)
+    // isLoggedIn: Observable<boolean> = of(true)
 
 ngOnInit(): void {
-  this.isLoggedIn = this.loginService.isLoggedIn()
-  console.log(this.isLoggedIn)
+  // this.isLoggedIn = this.loginService.isLoggedIn()
 }
 
 

@@ -1,3 +1,8 @@
+<app-nav-bar></app-nav-bar>
+<button mat-flat-button color="primary" (click)="openDialog()" class="add-post-btn">
+  Aggiungi Post
+  <mat-icon color="accent">post_add</mat-icon>
+</button>
 <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
   <div>
     <mat-form-field appearance="fill">
@@ -16,10 +21,6 @@
     </mat-button-toggle-group>
   </div>
 </form>
-<button mat-flat-button color="primary" (click)="openDialog()">
-  Aggiungi Post
-  <mat-icon color="accent">post_add</mat-icon>
-</button>
 <div *ngIf="loading">
   <mat-spinner></mat-spinner>
 </div>

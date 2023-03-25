@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private route: Router,
     private dialog: MatDialog,
-    private dialogService: DialogService
+    private dialogService: DialogService,
   ) {}
   loginForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
