@@ -54,7 +54,7 @@ describe('NavBarComponent', () => {
           {
             path: 'posts',
             loadChildren: () =>
-              import('../../posts/posts.module').then((m) => m.PostsModule),
+              import('../../../posts/posts.module').then((m) => m.PostsModule),
           },
         ]),
       ],

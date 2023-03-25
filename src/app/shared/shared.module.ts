@@ -7,24 +7,31 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
   declarations: [
     SharedComponent,
     DialogComponent,
+    NavBarComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MatButtonModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
 
   ],
+  exports: [NavBarComponent],
   entryComponents: [DialogComponent]
 
 })

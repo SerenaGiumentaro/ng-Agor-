@@ -25,13 +25,11 @@ import { UsersModule } from './dashboard/users.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SharedModule } from './shared/shared.module';
-import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
+import { PersonalProfileComponent } from './dashboard/components/personal-profile/personal-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent,
     PersonalProfileComponent,
   ],
   imports: [

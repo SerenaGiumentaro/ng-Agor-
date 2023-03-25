@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PersonalProfileComponent } from './components/personal-profile/personal-profile.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [

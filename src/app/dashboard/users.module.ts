@@ -23,6 +23,8 @@ import { PostsModule } from '../posts/posts.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NavBarComponent } from '../shared/components/nav-bar/nav-bar.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -52,9 +54,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     PostsModule,
     MatExpansionModule,
     MatDialogModule,
+    SharedModule
   ],
   exports: [
-    UserCardComponent
+    UserCardComponent,
   ]
 })
 export class UsersModule { }
