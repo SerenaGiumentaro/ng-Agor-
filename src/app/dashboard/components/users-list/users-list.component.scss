@@ -14,12 +14,12 @@ mat-form-field {
 }
 .users {
   width: 100vw;
-  margin-bottom: 3rem;
 }
 .users-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 mat-paginator{
   position: fixed;
@@ -29,4 +29,9 @@ mat-paginator{
 .add-user-btn{
   margin: 2rem 0;
   width: 150px;
+}
+@media screen and (max-width: 490px){
+  .users-container{
+    margin-bottom: 5rem;
+  }
 }

@@ -24,3 +24,8 @@ mat-paginator{
 .posts{
   margin-bottom: 3rem;
 }
+@media screen and (max-width: 490px){
+  .posts{
+    margin-bottom: 5rem;
+  }
+}
