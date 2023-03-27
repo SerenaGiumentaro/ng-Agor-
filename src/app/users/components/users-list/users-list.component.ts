@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { User } from 'src/app/interface';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 import { NewUserComponent } from '../new-user/new-user.component';
 
 @Component({

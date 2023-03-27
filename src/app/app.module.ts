@@ -21,12 +21,12 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PostsModule } from './posts/posts.module';
-import { UsersModule } from './dashboard/users.module';
+import { UsersModule } from './users/users.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SharedModule } from './shared/shared.module';
-import { PersonalProfileComponent } from './dashboard/components/personal-profile/personal-profile.component';
+import { PersonalProfileComponent } from './users/components/personal-profile/personal-profile.component';
 @NgModule({
   declarations: [
     AppComponent,

@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { LoginService } from 'src/app/login-signup/services/login.service';
 import { provideRouter, Router } from '@angular/router';
-import { UsersComponent } from 'src/app/dashboard/users.component';
+import { UsersComponent } from 'src/app/users/users.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { Post, User } from 'src/app/interface';
 import { PostService } from 'src/app/posts/services/post.service';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-user-data',

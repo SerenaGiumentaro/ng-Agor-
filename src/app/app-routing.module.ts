@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'users',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./dashboard/users.module').then((m) => m.UsersModule),
+      import('./users/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'posts',

@@ -6,7 +6,7 @@ import { PostService } from 'src/app/posts/services/post.service';
 import { PersonalProfileComponent } from './personal-profile.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { UserCardComponent } from 'src/app/dashboard/components/user-card/user-card.component';
+import { UserCardComponent } from 'src/app/users/components/user-card/user-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { PostComponent } from 'src/app/posts/components/post/post.component';

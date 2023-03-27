@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { Comment, Post, User } from 'src/app/interface';
 import { CommentsService } from 'src/app/posts/services/comments.service';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-post',
