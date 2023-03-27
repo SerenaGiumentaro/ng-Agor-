@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Post, User } from 'src/app/interface';
 
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',
-  styleUrls: ['./user-card.component.scss']
+  styleUrls: ['./user-card.component.scss'],
 })
-export class UserCardComponent implements OnInit{
+export class UserCardComponent {
   @Input() user: User = {
     name: '',
     email: '',
@@ -14,10 +14,5 @@ export class UserCardComponent implements OnInit{
     gender: '',
     id: 0,
   };
-  loading: boolean = false
-  allUserPosts: Post[] = [];
-
-  ngOnInit(): void {
-
-  }
+  loading: boolean = false;
 }

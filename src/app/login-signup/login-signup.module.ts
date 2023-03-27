@@ -15,13 +15,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 
-
 @NgModule({
-  declarations: [
-    LoginSignupComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
+  declarations: [LoginSignupComponent, LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     LoginSignupRoutingModule,
@@ -34,7 +29,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatInputModule
-  ]
+    MatInputModule,
+  ],
 })
-export class LoginSignupModule { }
+export class LoginSignupModule {}

@@ -15,23 +15,23 @@ mat-form-field {
 .users {
   width: 100vw;
 }
-.users-container{
+.users-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 3rem;
 }
-mat-paginator{
+mat-paginator {
   position: fixed;
   bottom: 0;
   width: 100vw;
 }
-.add-user-btn{
+.add-user-btn {
   margin: 2rem 0;
   width: 150px;
 }
-@media screen and (max-width: 490px){
-  .users-container{
+@media screen and (max-width: 490px) {
+  .users-container {
     margin-bottom: 5rem;
   }
 }

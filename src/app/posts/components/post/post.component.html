@@ -10,7 +10,12 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-flat-button (click)="hide = !hide" color="accent" class="show-comment">
+      <button
+        mat-flat-button
+        (click)="hide = !hide"
+        color="accent"
+        class="show-comment"
+      >
         {{ hide ? "Mostra Commenti" : "Nascondi Commenti" }}
         <mat-icon color="primary">comment</mat-icon>
       </button>

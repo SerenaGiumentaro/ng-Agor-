@@ -7,7 +7,7 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Nome</mat-label>
-      <input matInput formControlName="name" required/>
+      <input matInput formControlName="name" required />
       <button mat-icon-button matSuffix type="button">
         <mat-icon>person</mat-icon>
       </button>
@@ -52,14 +52,10 @@
     type="submit"
     [disabled]="!newUserForm.valid"
   >
-  <mat-icon>
-    person_add
-  </mat-icon>
+    <mat-icon> person_add </mat-icon>
     Aggiungi Utente
     <div *ngIf="loading">
       <mat-spinner></mat-spinner>
     </div>
   </button>
 </form>
-
-

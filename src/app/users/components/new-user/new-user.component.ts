@@ -40,20 +40,16 @@ export class NewUserComponent implements OnInit {
     this.userService.newUser(user).subscribe({
       next: () => {
         this.loading = false;
-        this.newUserForm.reset();
-        Object.keys(this.newUserForm.controls).forEach((key) => {
-          this.newUserForm.get(key)?.setErrors(null);
-        });
         this.dialogService.drawDialog(this.dialog, {
           title: `Nuovo utente creato con successo`,
           body: '',
           isDenialNeeded: false,
         });
-        this.dialogRef.close()
+        this.dialogRef.close();
       },
       error: (err) => {
         this.loading = false;
-        console.log(err)
+        console.log(err);
         switch (err.status) {
           case 422:
             {

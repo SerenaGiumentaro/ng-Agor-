@@ -18,7 +18,7 @@ export class UserDataComponent implements OnInit {
     private dialog: MatDialog
   ) {}
   loading: boolean = false;
-  havePost!: boolean
+  havePost!: boolean;
   user!: User;
   allPosts!: Post[];
   ngOnInit(): void {
@@ -26,13 +26,13 @@ export class UserDataComponent implements OnInit {
     this.user = this.userService.getSelectedUser();
     this.postService.getUserPosts(this.user.id).subscribe({
       next: (res) => {
-        if(res.length === 0){
-          this.havePost = false
-          this.loading = false
-          return
+        if (res.length === 0) {
+          this.havePost = false;
+          this.loading = false;
+          return;
         }
         this.allPosts = res;
-        this.havePost = true
+        this.havePost = true;
         this.loading = false;
       },
       error: (err) => {

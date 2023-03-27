@@ -24,7 +24,12 @@ const routes: Routes = [
         (m) => m.LoginSignupModule
       ),
   },
-  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
+  {
+    path: 'shared',
+    loadChildren: () =>
+      import('./shared/shared.module').then((m) => m.SharedModule),
+  },
+  { path: '**', redirectTo: 'login-signup' },
 ];
 
 @NgModule({
