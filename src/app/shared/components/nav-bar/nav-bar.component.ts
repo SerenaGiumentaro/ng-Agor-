@@ -14,9 +14,8 @@ export class NavBarComponent {
     private dialog: MatDialog,
     private dialogService: DialogService
   ) {}
-
+  body = document.querySelector('body');
   title = `Agorà`;
-
   logout() {
     const dialogConfig = {
       title: 'Logout',

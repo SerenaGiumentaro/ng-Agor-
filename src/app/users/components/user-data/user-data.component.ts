@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { Post, User } from 'src/app/interface';
 import { PostService } from 'src/app/posts/services/post.service';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-user-data',
@@ -18,7 +18,7 @@ export class UserDataComponent implements OnInit {
     private dialog: MatDialog
   ) {}
   loading: boolean = false;
-  havePost!: boolean
+  havePost!: boolean;
   user!: User;
   allPosts!: Post[];
   ngOnInit(): void {
@@ -26,13 +26,13 @@ export class UserDataComponent implements OnInit {
     this.user = this.userService.getSelectedUser();
     this.postService.getUserPosts(this.user.id).subscribe({
       next: (res) => {
-        if(res.length === 0){
-          this.havePost = false
-          this.loading = false
-          return
+        if (res.length === 0) {
+          this.havePost = false;
+          this.loading = false;
+          return;
         }
         this.allPosts = res;
-        this.havePost = true
+        this.havePost = true;
         this.loading = false;
       },
       error: (err) => {

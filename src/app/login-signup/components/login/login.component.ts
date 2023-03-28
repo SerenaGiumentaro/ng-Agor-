@@ -13,13 +13,13 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  hide: boolean = true
+  hide: boolean = true;
   loading: boolean = false;
   constructor(
     private loginService: LoginService,
     private route: Router,
     private dialog: MatDialog,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) {}
   loginForm!: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         );
         localStorage.setItem('user_id', JSON.stringify(res[0].id));
         localStorage.setItem('isLoggedIn', 'true');
-        this.loginService.login()
+        this.loginService.login();
       },
       error: (err) => {
         this.loading = false;

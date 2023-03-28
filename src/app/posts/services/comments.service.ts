@@ -25,16 +25,18 @@ export class CommentsService {
     userEmail: string,
     comment: string
   ): Observable<Comment> {
-    return this.http.post<Comment>(`${postsUrl}/${postId}/comments`, {
-      post_id: postId,
-      name: userName,
-      email: userEmail,
-      body: comment,
-    }).pipe(
-      catchError((err)=> {
-        console.error(err.message)
-        return throwError(()=> err)
+    return this.http
+      .post<Comment>(`${postsUrl}/${postId}/comments`, {
+        post_id: postId,
+        name: userName,
+        email: userEmail,
+        body: comment,
       })
-    );
+      .pipe(
+        catchError((err) => {
+          console.error(err.message);
+          return throwError(() => err);
+        })
+      );
   }
 }

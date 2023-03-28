@@ -38,11 +38,7 @@ export class NewPostComponent implements OnInit {
             body: '',
             isDenialNeeded: false,
           });
-          this.newPost.reset();
-          Object.keys(this.newPost.controls).forEach((key) => {
-            this.newPost.get(key)?.setErrors(null);
-          });
-          this.dialogRef.close()
+          this.dialogRef.close();
         },
         error: (err) => {
           this.loading = false;

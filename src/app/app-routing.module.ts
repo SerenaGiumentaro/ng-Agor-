@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'users',
     canActivate: [AuthGuard],
     loadChildren: () =>
-      import('./dashboard/users.module').then((m) => m.UsersModule),
+      import('./users/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'posts',
@@ -24,7 +24,12 @@ const routes: Routes = [
         (m) => m.LoginSignupModule
       ),
   },
-  { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
+  {
+    path: 'shared',
+    loadChildren: () =>
+      import('./shared/shared.module').then((m) => m.SharedModule),
+  },
+  { path: '**', redirectTo: 'login-signup' },
 ];
 
 @NgModule({

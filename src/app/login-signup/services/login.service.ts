@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, throwError , BehaviorSubject} from 'rxjs';
+import { catchError, Observable, throwError, BehaviorSubject } from 'rxjs';
 import { usersUlr } from 'src/app/api.config';
 import { User } from '../../interface';
 
@@ -11,15 +11,13 @@ import { User } from '../../interface';
 export class LoginService {
   constructor(private http: HttpClient, private route: Router) {}
   currentUser!: User[];
-  isLogged = new BehaviorSubject<boolean>(false)
-  // isLogged!: boolean
+  isLogged = new BehaviorSubject<boolean>(false);
   getCurrentUser() {
     return this.currentUser;
   }
 
-  isLoggedIn(){
-    return this.isLogged.asObservable()
-    // return this.isLogged
+  isLoggedIn() {
+    return this.isLogged.asObservable();
   }
   checkUser(params: HttpParams): Observable<User[]> {
     return this.http
@@ -34,15 +32,13 @@ export class LoginService {
   }
 
   logout() {
-    this.isLogged.next(false)
-    // this.isLogged = false
+    this.isLogged.next(false);
     localStorage.clear();
     this.route.navigate(['login-signup']);
   }
 
-  login(){
-    this.isLogged.next(true)
-    // this.isLogged = true
-    this.route.navigate(['users'])
+  login() {
+    this.isLogged.next(true);
+    this.route.navigate(['users']);
   }
 }

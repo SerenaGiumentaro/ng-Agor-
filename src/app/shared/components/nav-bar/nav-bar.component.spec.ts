@@ -116,7 +116,7 @@ describe('NavBarComponent', () => {
     });
     const mockDialogConfig = {
       title: 'Logout',
-      body: `Vuoi uscire dall'appliocazione?`,
+      body: `Vuoi uscire dall'applicazione?`,
       isDenialNeeded: true,
     };
     it(`should call the logout when clicked`, () => {
@@ -131,7 +131,7 @@ describe('NavBarComponent', () => {
     it(`should call the logout function after press ok`, async()=> {
       const dialogRef: MatDialogRef<DialogComponent> = TestBed.inject(MatDialogRef)
       spyOn(dialogRef, 'afterClosed').and.returnValue(of(true))
-      component.logout()
+      // component.logout()
       spyOn(loginService, 'logout')
       await fixture.whenStable()
       expect(loginService.logout).toHaveBeenCalled()

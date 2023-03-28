@@ -1,4 +1,9 @@
-<form [formGroup]="loginForm" class="flex-center" (ngSubmit)="onSubmit()" *ngIf="!loading">
+<form
+  [formGroup]="loginForm"
+  class="flex-center"
+  (ngSubmit)="onSubmit()"
+  *ngIf="!loading"
+>
   <h3>Login</h3>
   <div>
     <mat-form-field appearance="fill">

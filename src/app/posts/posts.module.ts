@@ -16,8 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NewPostComponent } from './components/new-post/new-post.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from '../shared/shared.module';
 @NgModule({
@@ -40,8 +38,6 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     MatInputModule,
     MatButtonToggleModule,
-    MatSnackBarModule,
-    MatExpansionModule,
     MatDialogModule,
     SharedModule
   ],

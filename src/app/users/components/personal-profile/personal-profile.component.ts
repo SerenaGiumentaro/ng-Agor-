@@ -28,7 +28,7 @@ export class PersonalProfileComponent implements OnInit {
   allUserPosts: Post[] = [];
 
   ngOnInit(): void {
-    this.loading = true
+    this.loading = true;
     const id: any = localStorage.getItem('user_id');
     const currentUser: any = localStorage.getItem('user');
     this.user = JSON.parse(currentUser);

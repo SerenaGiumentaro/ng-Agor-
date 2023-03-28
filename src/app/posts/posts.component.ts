@@ -18,10 +18,10 @@ export class PostsComponent implements OnInit {
     private postService: PostService,
     private dialog: MatDialog,
     private dialogService: DialogService,
-    private dialogNewPost: MatDialog,
+    private dialogNewPost: MatDialog
   ) {}
   @ViewChild('searchInput') searchInput!: ElementRef;
-  dialogNewPostConfig = new MatDialogConfig
+  dialogNewPostConfig = new MatDialogConfig();
   searchForm!: FormGroup;
   hideNewPost: boolean = true;
   havePost: boolean = true;
@@ -136,7 +136,7 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  openDialog(){
-    this.dialogNewPost.open(NewPostComponent, this.dialogNewPostConfig)
+  openDialog() {
+    this.dialogNewPost.open(NewPostComponent, this.dialogNewPostConfig);
   }
 }

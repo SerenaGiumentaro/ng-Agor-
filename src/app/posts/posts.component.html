@@ -11,7 +11,7 @@
 <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>Search...</mat-label>
+      <mat-label>Cerca...</mat-label>
       <input matInput formControlName="keyword" type="text" #searchInput />
       <button mat-icon-button matSuffix type="submit">
         <mat-icon>search</mat-icon>
@@ -31,7 +31,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="!loading && havePost" class="posts">
-  <div *ngFor="let post of allPosts" >
+  <div *ngFor="let post of allPosts">
     <app-post [post]="post"></app-post>
   </div>
   <mat-paginator

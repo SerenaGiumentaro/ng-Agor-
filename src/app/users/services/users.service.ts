@@ -14,21 +14,18 @@ export class UsersService {
     return this.selectedUser;
   }
   getUser(id: number): Observable<User> {
-    return this.http
-      .get<User>(`${usersUlr}/${id}`)
-      .pipe(
-        catchError((err) => {
-          return throwError(() => err);
-        })
-      );
+    return this.http.get<User>(`${usersUlr}/${id}`).pipe(
+      catchError((err) => {
+        return throwError(() => err);
+      })
+    );
   }
 
   getAllUsers(page: number, perPage: number): Observable<HttpResponse<User[]>> {
     return this.http
-      .get<User[]>(
-        `${usersUlr}?page=${page}&per_page=${perPage}`,
-        { observe: 'response' }
-      )
+      .get<User[]>(`${usersUlr}?page=${page}&per_page=${perPage}`, {
+        observe: 'response',
+      })
       .pipe(
         catchError((err) => {
           return throwError(() => err);

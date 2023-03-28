@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { User } from 'src/app/interface';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 @Component({
   selector: 'app-user',
