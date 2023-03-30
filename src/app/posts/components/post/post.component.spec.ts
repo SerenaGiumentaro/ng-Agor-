@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PostService } from 'src/app/posts/services/post.service';
-import { UsersService } from 'src/app/dashboard/services/users.service';
+import { UsersService } from 'src/app/users/services/users.service';
 
 import { PostComponent } from './post.component';
 
@@ -12,6 +13,7 @@ describe('PostComponent', () => {
   let fixture: ComponentFixture<PostComponent>;
   let httpCLient: HttpClient
   let httpTestingController: HttpTestingController
+  let dialog: MatDialog
   let userService: UsersService
   let postService: PostService
 
@@ -21,6 +23,9 @@ describe('PostComponent', () => {
       imports: [
         HttpClientTestingModule,
         MatCardModule
+      ],
+      providers: [
+        {provide: MatDialogRef, useValue: dialog}
       ]
     })
     .compileComponents();

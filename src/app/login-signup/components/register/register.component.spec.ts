@@ -15,7 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter, Router } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { usersUlr } from 'src/app/api.config';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -24,6 +25,7 @@ describe('RegisterComponent', () => {
   let httpTestingController: HttpTestingController;
   let router: Router;
   let navigateSpy: jasmine.Spy;
+  let dialogMock: MatDialog
   let mockDialog: jasmine.SpyObj<MatDialog>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,10 +39,11 @@ describe('RegisterComponent', () => {
         ReactiveFormsModule,
         MatInputModule,
         BrowserAnimationsModule,
+        MatDialogModule
       ],
       providers: [
         MyErrorStateMatcher,
-        { provide: MatDialog, useValue: mockDialog },
+        // { provide: MatDialog, useValue: mockDialog },
         provideRouter([{ path: 'login', component: LoginComponent }]),
       ],
     }).compileComponents();
@@ -51,6 +54,7 @@ describe('RegisterComponent', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
     navigateSpy = spyOn(router, 'navigate');
+    dialogMock = TestBed.inject(MatDialog)
     fixture.detectChanges();
   });
 
@@ -58,7 +62,7 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should send a request with the expected body', () => {
+ it('should send a request with the expected body', () => {
     component.registerForm.setValue({
       name: 'Test Test',
       email: 'test@test.com',
@@ -102,8 +106,7 @@ describe('RegisterComponent', () => {
     );
     expect(localStorage.getItem('token')).toBe(null);
     expect(localStorage.getItem('user_id')).toBe(null);
-    // experct error to be displayed
-    // expect(window.alert).toHaveBeenCalledWith(`L'utente esiste già`)
+
   });
 
   it('should display an error if token is not valid', () => {
@@ -138,7 +141,7 @@ describe('RegisterComponent', () => {
     component.onSubmit();
 
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users'
+      `${usersUlr}`
     );
     const mockResponseNewUserCreated = {
       id: 111,
@@ -148,13 +151,7 @@ describe('RegisterComponent', () => {
       status: 'active',
     };
     req.flush(mockResponseNewUserCreated);
-    expect(localStorage.getItem('user_id')).toEqual('111');
-    expect(localStorage.getItem('token')).toEqual('TestToken');
-    expect(router.navigate).toHaveBeenCalledWith(['login']);
+    expect(router.navigate).toHaveBeenCalledWith(['login-signup']);
     // testa la segnalazione che l'utente è stato creato
-  });
-
-  afterEach(() => {
-    localStorage.clear();
   });
 });

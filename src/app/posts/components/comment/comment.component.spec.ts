@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
 
 import { CommentComponent } from './comment.component';
 
@@ -7,7 +8,10 @@ describe('CommentComponent', () => {
   let fixture: ComponentFixture<CommentComponent>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentComponent ]
+      declarations: [ CommentComponent ],
+      imports: [
+        MatCardModule
+      ]
     })
     .compileComponents();
 

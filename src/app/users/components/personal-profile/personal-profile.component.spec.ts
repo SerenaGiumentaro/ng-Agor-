@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NavBarComponent } from 'src/app/shared/components/nav-bar/nav-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 describe('PersonalProfileComponent', () => {
   let component: PersonalProfileComponent;
@@ -41,6 +43,7 @@ describe('PersonalProfileComponent', () => {
         PersonalProfileComponent,
         UserCardComponent,
         PostComponent,
+        NavBarComponent
       ],
       imports: [
         HttpClientTestingModule,
@@ -53,6 +56,7 @@ describe('PersonalProfileComponent', () => {
         ReactiveFormsModule,
         MatInputModule,
         BrowserAnimationsModule,
+        MatToolbarModule
       ],
       providers: [
         { provide: PostService, useValue: postServiceMock },

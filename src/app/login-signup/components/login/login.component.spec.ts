@@ -15,15 +15,17 @@ import { By } from '@angular/platform-browser';
 import { LoginService } from 'src/app/login-signup/services/login.service';
 import { provideRouter, Router } from '@angular/router';
 import { UsersComponent } from 'src/app/users/users.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { usersUlr } from 'src/app/api.config';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let loginService: LoginService;
   let route: Router;
   let navigateSpy: jasmine.Spy
+  let dialogMock: MatDialog
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
@@ -35,6 +37,7 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         MatInputModule,
         BrowserAnimationsModule,
+        MatDialogModule
       ],
       providers: [
         ErrorStateMatcher,
@@ -44,11 +47,11 @@ describe('LoginComponent', () => {
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    httpClient = TestBed.inject(HttpClient);
     httpTestingController = TestBed.inject(HttpTestingController);
     loginService = TestBed.inject(LoginService);
     route = TestBed.inject(Router);
     navigateSpy = spyOn(route, 'navigate')
+    dialogMock = TestBed.inject(MatDialog)
     fixture.detectChanges();
   });
 
@@ -103,7 +106,7 @@ describe('Login success tests', ()=> {
       component.loginForm.value.email
     );
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users?' + 'email=' + params.get('email')
+      `${usersUlr}?` + 'email=' + params.get('email')
     );
     const mockResponseIsLogin = [
       {
@@ -126,8 +129,8 @@ describe('Login success tests', ()=> {
     expect(localStorage.getItem('isLoggedIn')).toBe('true');
   })
 
-  it('should navigate to dashboard after the login success', ()=> {
-    expect(navigateSpy).toHaveBeenCalledWith(['dashboard'])
+  it('should navigate to users after the login success', ()=> {
+    expect(navigateSpy).toHaveBeenCalledWith(['users'])
   })
 })
 
@@ -143,10 +146,11 @@ describe('Login success tests', ()=> {
       component.loginForm.value.email
     );
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users?' + 'email=' + params.get('email')
+      `${usersUlr}?email=${params.get('email')}`
     );
     // the API send an empty array and not an error state even if the token is not valid
     req.flush([]);
+    expect(dialogMock).toBeTruthy()
     expect(localStorage.getItem('token')).toEqual(null);
     expect(localStorage.getItem('user_id')).toBe(null);
     expect(localStorage.getItem('isLoggedIn')).toBe(null);
