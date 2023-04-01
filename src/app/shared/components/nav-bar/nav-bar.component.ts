@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from 'src/app/login-signup/services/login.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';

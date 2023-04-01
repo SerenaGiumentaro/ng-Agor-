@@ -1,7 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MyErrorStateMatcher } from 'src/app/my-errorstatematcher';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
@@ -17,7 +16,6 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   constructor(
     private loginService: LoginService,
-    private route: Router,
     private dialog: MatDialog,
     private dialogService: DialogService
   ) {}

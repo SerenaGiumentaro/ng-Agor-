@@ -12,20 +12,20 @@ form {
 mat-form-field {
   width: 100%;
 }
-mat-paginator{
+mat-paginator {
   position: fixed;
   bottom: 0;
   width: 100vw;
 }
-.add-post-btn{
+.add-post-btn {
   margin: 2rem 0;
   width: 150px;
 }
-.posts{
+.posts {
   margin-bottom: 3rem;
 }
-@media screen and (max-width: 490px){
-  .posts{
+@media screen and (max-width: 490px) {
+  .posts {
     margin-bottom: 5rem;
   }
 }

@@ -41,7 +41,7 @@ export class PostService {
     perPage: number
   ): Observable<HttpResponse<Post[]>> {
     return this.http
-      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}&`, {
+      .get<Post[]>(`${postsUrl}?page=${page}&per_page=${perPage}`, {
         params,
         observe: 'response',
       })
