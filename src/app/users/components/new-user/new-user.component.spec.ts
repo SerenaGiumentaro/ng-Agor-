@@ -12,10 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
-import { User, UserBody } from 'src/app/interface';
+import { User} from 'src/app/interface';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { UsersService } from '../../services/users.service';
-
 import { NewUserComponent } from './new-user.component';
 
 describe('NewUserComponent', () => {

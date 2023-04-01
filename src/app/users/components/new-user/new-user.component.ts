@@ -49,7 +49,6 @@ export class NewUserComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        console.log(err);
         switch (err.status) {
           case 422:
             {

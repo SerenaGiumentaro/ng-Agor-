@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -24,11 +22,7 @@ describe('NavBarComponent', () => {
   let dialogService: DialogService;
   let loginService: LoginService;
   let dialog: MatDialog;
-  // let mockDialog: jasmine.SpyObj<MatDialog>;
-  // let drawDialogSpy: jasmine.Spy;
   beforeEach(async () => {
-    // mockDialog = jasmine.createSpyObj(['open', 'afterClosed']);
-    // drawDialogSpy = spyOn(DialogService.prototype, 'drawDialog');
     await TestBed.configureTestingModule({
       declarations: [NavBarComponent],
       imports: [
@@ -39,13 +33,16 @@ describe('NavBarComponent', () => {
         MatDialogModule,
       ],
       providers: [
-        // { provide: MatDialog, useValue: mockDialog },
-        // { provide: MatDialogRef, useValue: { afterClosed: () => of(true) } },
         provideRouter([
           {
             path: 'posts',
             loadChildren: () =>
               import('../../../posts/posts.module').then((m) => m.PostsModule),
+          },
+          {
+            path: 'users',
+            loadChildren: () =>
+              import('../../../users/users.module').then((m) => m.UsersModule),
           },
         ]),
       ],

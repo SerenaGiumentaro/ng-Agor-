@@ -54,11 +54,10 @@ describe('NewPostComponent', () => {
     expect(component).toBeTruthy();
   });
   describe(`Creating new post`, () => {
-    // const id = 111;
-    localStorage.setItem('user_id', '111')
     let postServiceSpy: jasmine.Spy;
     let dialogServicespy: jasmine.Spy;
     beforeEach(() => {
+      spyOn(localStorage, 'getItem').and.returnValue('111')
       component.newPost.setValue({
         title: 'Mock title',
         body: 'Mock body',

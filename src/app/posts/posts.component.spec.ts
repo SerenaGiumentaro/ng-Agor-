@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { NavBarComponent } from '../shared/components/nav-bar/nav-bar.component';
 import { DialogService } from '../shared/services/dialog.service';
-
 import { PostsComponent } from './posts.component';
 import { PostService } from './services/post.service';
 
@@ -57,9 +56,6 @@ describe('PostsComponent', () => {
         ReactiveFormsModule,
         MatProgressSpinnerModule,
         MatInputModule,
-      ],
-      providers: [
-        {provide: MatDialogRef, useValue: dialog}
       ]
     }).compileComponents();
 
@@ -100,19 +96,21 @@ describe('PostsComponent', () => {
       expect(component.lenghtPosts).toEqual('10');
     });
   });
-  it(`should rendera dialog errror after error response`, () => {
+  it(`should render a dialog error after error response`, () => {
     spyOn(postService, 'getAllPosts').and.returnValue(
       throwError(() => new Error('status: 0, message: "Errore del server"'))
     );
+    const dialogSpy = spyOn(dialog, 'open')
     component.getAllPost(component.pageIndex, component.pageSize);
-    expect(dialog).toBeTruthy();
+    expect(dialogSpy).toHaveBeenCalled();
   });
   it(`should open new-post dialog after click on button New Post`, () => {
     const newPostBtn = fixture.debugElement.query(
       By.css('.add-post-btn')
     ).nativeElement;
+    const dialogNewPostSpy = spyOn(dialogNewPost, 'open')
     newPostBtn.click();
-    expect(dialogNewPost).toBeTruthy();
+    expect(dialogNewPostSpy).toHaveBeenCalled()
   });
 
   describe(`Research posts`, () => {

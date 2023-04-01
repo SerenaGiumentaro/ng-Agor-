@@ -26,7 +26,6 @@ describe('RegisterComponent', () => {
   let router: Router;
   let navigateSpy: jasmine.Spy;
   let dialogMock: MatDialog
-  let mockDialog: jasmine.SpyObj<MatDialog>;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
@@ -43,7 +42,6 @@ describe('RegisterComponent', () => {
       ],
       providers: [
         MyErrorStateMatcher,
-        // { provide: MatDialog, useValue: mockDialog },
         provideRouter([{ path: 'login', component: LoginComponent }]),
       ],
     }).compileComponents();
@@ -72,9 +70,9 @@ describe('RegisterComponent', () => {
 
     component.onSubmit();
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users'
-    );
-    expect(req.request.method).toEqual('POST');
+      `${usersUlr}`
+      );
+      expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual({
       name: 'Test Test',
       email: 'test@test.com',
@@ -83,7 +81,7 @@ describe('RegisterComponent', () => {
     });
     expect(req.request.headers.get('Authorization')).toEqual(
       'Bearer TestToken'
-    );
+      );
   });
 
   it('should display error if user exist and should not have data in localstorage', () => {
@@ -96,14 +94,14 @@ describe('RegisterComponent', () => {
 
     component.onSubmit();
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users'
-    );
+      `${usersUlr}`
+      );
 
     // Mock the HTTP response
     req.flush(
       { error: 'User already exist' },
       { status: 422, statusText: 'Unprocessable Entity' }
-    );
+      );
     expect(localStorage.getItem('token')).toBe(null);
     expect(localStorage.getItem('user_id')).toBe(null);
 
@@ -118,7 +116,7 @@ describe('RegisterComponent', () => {
     });
     component.onSubmit();
     const req = httpTestingController.expectOne(
-      'https://gorest.co.in/public/v2/users'
+      `${usersUlr}`
     );
     req.flush(
       { error: 'Authentication failed' },
@@ -126,8 +124,6 @@ describe('RegisterComponent', () => {
     );
     expect(localStorage.getItem('token')).toBe(null);
     expect(localStorage.getItem('user_id')).toBe(null);
-
-    // aggiungere test per lo show error
   });
 
   it('should create a new user', () => {
@@ -152,6 +148,5 @@ describe('RegisterComponent', () => {
     };
     req.flush(mockResponseNewUserCreated);
     expect(router.navigate).toHaveBeenCalledWith(['login-signup']);
-    // testa la segnalazione che l'utente è stato creato
   });
 });

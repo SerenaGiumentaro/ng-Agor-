@@ -13,7 +13,6 @@ export class CommentsService {
   getPostComments(post_id: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${postsUrl}/${post_id}/comments`).pipe(
       catchError((err) => {
-        console.error(err.message);
         return throwError(() => err);
       })
     );
@@ -34,7 +33,6 @@ export class CommentsService {
       })
       .pipe(
         catchError((err) => {
-          console.error(err.message);
           return throwError(() => err);
         })
       );

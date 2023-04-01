@@ -56,7 +56,6 @@ export class UserComponent implements OnInit {
                 isDenialNeeded: false,
               });
             }
-            console.error(`Delete user error: ${err.message}`);
           },
         });
       }
