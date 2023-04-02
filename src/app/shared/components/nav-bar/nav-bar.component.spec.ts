@@ -1,6 +1,4 @@
-import {
-  HttpClientTestingModule,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -118,7 +116,7 @@ describe('NavBarComponent', () => {
 
     it(`should open dialog calling dialog service`, () => {
       dialogService.drawDialog(dialog, mockDialogConfig);
-      expect(dialog).toBeTruthy();
+      expect(dialogService.drawDialog).toHaveBeenCalled();
     });
 
     it(`should call the logout function after press ok`, () => {

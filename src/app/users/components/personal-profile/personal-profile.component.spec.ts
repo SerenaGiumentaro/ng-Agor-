@@ -35,6 +35,13 @@ describe('PersonalProfileComponent', () => {
       body: 'Post Body',
     },
   ];
+  const mockUser: User = {
+    name: 'Test User',
+    email: 'user@test.com',
+    id: 111,
+    status: 'active',
+    gender: 'female',
+  };
   beforeEach(async () => {
     postServiceMock = jasmine.createSpyObj('PostService', ['getUserPosts']);
     drawDialogMock = jasmine.createSpyObj('DialogService', ['drawDialog']);
@@ -75,16 +82,9 @@ describe('PersonalProfileComponent', () => {
   });
 
   describe('should render the User data', () => {
-    const mockUser: User = {
-      name: 'Test User',
-      email: 'user@test.com',
-      id: 111,
-      status: 'active',
-      gender: 'female',
-    };
-    localStorage.setItem('user', JSON.stringify(mockUser));
     beforeEach(() => {
       postServiceMock.getUserPosts.and.returnValue(of(mockPost));
+      spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser))
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -102,32 +102,34 @@ describe('PersonalProfileComponent', () => {
 
     it(`should render a error message if there are no posts`, () => {
       postServiceMock.getUserPosts.and.returnValue(of(mockNoPost));
+      spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser))
       component.ngOnInit();
       fixture.detectChanges();
       const message = fixture.debugElement.query(
         By.css('div.flex-center.message')
-      );
-      expect(message.nativeElement.innerText).toEqual(
-        'Non ci sono post ancora'
-      );
-    });
-  });
+        );
+        expect(message.nativeElement.innerText).toEqual(
+          'Non ci sono post ancora'
+          );
+        });
+      });
 
-  it(`should show a dialog message for server error`, () => {
-    const mockError = new HttpErrorResponse({
-      error: 'Server Error',
-      status: 0,
-      statusText: 'Server Error',
+      it(`should show a dialog message for server error`, () => {
+        spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify(mockUser))
+        const mockError = new HttpErrorResponse({
+          error: 'Server Error',
+          status: 0,
+          statusText: 'Server Error',
+        });
+        postServiceMock.getUserPosts.and.returnValue(throwError(() => mockError));
+        component.ngOnInit();
+        fixture.detectChanges();
+        expect(mockError.status).toBe(0);
+        expect(component.loading).toEqual(false);
+        expect(drawDialogMock.drawDialog).toHaveBeenCalledWith(mockDialog, {
+          title: 'Errore dal server',
+          body: '',
+          isDenialNeeded: false,
+        });
+      });
     });
-    postServiceMock.getUserPosts.and.returnValue(throwError(() => mockError));
-    component.ngOnInit();
-    fixture.detectChanges();
-    expect(mockError.status).toBe(0);
-    expect(component.loading).toEqual(false);
-    expect(drawDialogMock.drawDialog).toHaveBeenCalledWith(mockDialog, {
-      title: 'Errore dal server',
-      body: '',
-      isDenialNeeded: false,
-    });
-  });
-});
