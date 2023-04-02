@@ -1,4 +1,11 @@
-# Agora
+# Agorà
+
+Agorà in ancient Greek cities was an open space that served as a meeting ground for various activities. The decision to name this WebApp "Agorà" reflects the platform's purpose to bring people together and facilitate open discussion on a wide range of topics.
+
+Agorà allows users to create anc account by register, and then users can log-in to the platform using the token provided by GoRest API (you can get it by clicking [here](https://gorest.co.in/my-account/access-tokens)).
+Users can create new post and comments, and adding comments to other users's posts. Also user can create new users and delete them.
+
+Here you can find a demo (https://agora-ng.netlify.app)
 ## Project Tree
 ```bash
 .
@@ -6,7 +13,7 @@
     ├── app/
     │   ├── components
     │   └── services
-    ├── dashboard/
+    ├── users/
     │   ├── components
     │   └── services
     ├── login-signup/
@@ -24,7 +31,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
 
 For lazy loading pourpose it is divided by modules:
-- dashboard('users')
+- users
 - posts
 - login-signup, that handle the authentication system
 - shared, that handle the dialog component shared with all the application
