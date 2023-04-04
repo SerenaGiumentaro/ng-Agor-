@@ -36,6 +36,9 @@ For lazy loading pourpose it is divided by modules:
 - login-signup, that handle the authentication system
 - shared, that handle the dialog component shared with all the application
 
+## Install
+Run `npm install` on your device for try the application.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
